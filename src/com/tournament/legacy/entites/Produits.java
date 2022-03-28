@@ -7,7 +7,7 @@ package com.tournament.legacy.entites;
 
 /**
  *
- * @author aymen
+ * @author Aymen Laroussi
  */
 public class Produits {
     // Déclaration des attributs du Produits
@@ -15,15 +15,78 @@ public class Produits {
     private int id;
     private String titre;
     private String description;
-    private int promo;
-    private boolean flash;
+    private String promo;
+    private String stock;
+    private String flash;
     private String image;
     private String ref;
     private String longdescription;
-    private float prix;
-    private Categories categories;
+    private String prix;
+    private String categories;
+    public Produits(int id, String titre, String description, String promo, String stock, String ref, String longdescription, String prix, String categories) {
+        this.id = id;
+        this.titre = titre;
+        this.description = description;
+        this.promo = promo;
+        this.stock = stock;
+        this.ref = ref;
+        this.longdescription = longdescription;
+        this.prix = prix;
+        this.categories = categories;
+    }
 
-    public Produits(int id, String titre, String description, int promo, boolean flash, String image, String ref, String longdescription, float prix, Categories categories) {
+    public Produits(String titre, String description, String promo, String stock, String ref, String longdescription, String prix, String categories) {
+        this.titre = titre;
+        this.description = description;
+        this.promo = promo;
+        this.stock = stock;
+        this.ref = ref;
+        this.longdescription = longdescription;
+        this.prix = prix;
+        this.categories = categories;
+    }
+    
+
+    
+    public Produits(int id, String titre, String description, String promo, String ref, String longdescription, String prix, String categories) {
+        this.id = id;
+        this.titre = titre;
+        this.description = description;
+        this.promo = promo;
+        this.ref = ref;
+        this.longdescription = longdescription;
+        this.prix = prix;
+        this.categories = categories;
+    }
+
+    public Produits(int id, String titre, String description, String promo, String stock, String flash, String image, String ref, String longdescription, String prix, String categories) {
+        this.id = id;
+        this.titre = titre;
+        this.description = description;
+        this.promo = promo;
+        this.stock = stock;
+        this.flash = flash;
+        this.image = image;
+        this.ref = ref;
+        this.longdescription = longdescription;
+        this.prix = prix;
+        this.categories = categories;
+    }
+
+    public Produits(String valueOf, String valueOf0, String valueOf1, String valueOf2, String valueOf3, String valueOf4, String valueOf5) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public String getStock() {
+        return stock;
+    }
+
+    public void setStock(String stock) {
+        this.stock = stock;
+    }
+   
+
+    public Produits(int id, String titre, String description, String promo, String flash, String image, String ref, String longdescription, String prix, String categories) {
         this.id = id;
         this.titre = titre;
         this.description = description;
@@ -36,7 +99,7 @@ public class Produits {
         this.categories = categories;
     }
 
-    public Produits(String titre, String description, int promo, boolean flash, String image, String ref, String longdescription, float prix, Categories categories) {
+    public Produits(String titre, String description, String promo, String flash, String image, String ref, String longdescription, String prix, String categories) {
         this.titre = titre;
         this.description = description;
         this.promo = promo;
@@ -72,19 +135,19 @@ public class Produits {
         this.description = description;
     }
 
-    public int getPromo() {
+    public String getPromo() {
         return promo;
     }
 
-    public void setPromo(int promo) {
+    public void setPromo(String promo) {
         this.promo = promo;
     }
 
-    public boolean isFlash() {
+    public String isFlash() {
         return flash;
     }
 
-    public void setFlash(boolean flash) {
+    public void setFlash(String flash) {
         this.flash = flash;
     }
 
@@ -112,19 +175,19 @@ public class Produits {
         this.longdescription = longdescription;
     }
 
-    public float getPrix() {
+    public String getPrix() {
         return prix;
     }
 
-    public void setPrix(float prix) {
+    public void setPrix(String prix) {
         this.prix = prix;
     }
 
-    public Categories getCategories() {
+    public String getCategories() {
         return categories;
     }
 
-    public void setCategories(Categories categories) {
+    public void setCategories(String categories) {
         this.categories = categories;
     }
 

@@ -7,7 +7,7 @@ package com.tournament.legacy.entites;
 
 /**
  *
- * @author aymen
+ * @author Aymen Laroussi
  */
 public class Categories {
     // Déclaration des attributs du Catégories
