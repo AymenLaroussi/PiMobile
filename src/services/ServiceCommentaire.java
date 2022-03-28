@@ -26,7 +26,8 @@ import java.util.Map;
 public class ServiceCommentaire {
     
     
-    
+    Database db;
+    public ArrayList<Commentaires> coment;
     public static ServiceCommentaire instance;
     public boolean resultOK;
     private ConnectionRequest req;
@@ -100,6 +101,20 @@ public class ServiceCommentaire {
         return coment;
     }
     
-           
+    public void supprimerCommentaire(String p){
+        String url = Statics.BASE_URL + "/web/service/supprimer?id="+ p;
+        req.setUrl(url);
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                req.removeResponseListener(this);
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+    }
+    
+    
+    
+        
 }
 

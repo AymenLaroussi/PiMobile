@@ -32,9 +32,11 @@ public class ListCommentairesForm extends Form {
         ArrayList<Commentaires> list = ServiceCommentaire.getInstance().ListeCommentaires();
         for ( Commentaires c : list){
             System.out.println(c.getMessage());
+            btnSuppriemr.addActionListener(e-> ServiceCommentaire.getInstance().supprimerCommentaire(c.getId()));
             
          add(new Label(c.getId()));   
          add(new Label(c.getMessage()));
+         addAll(btnSuppriemr);
         }
           
           
