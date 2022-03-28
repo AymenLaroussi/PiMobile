@@ -5,42 +5,57 @@
  */
 package com.tournament.legacy.entites;
 
-import java.util.Date;
-
 /**
  *
- * @author aymen
+ * @author Aymen Laroussi
  */
 public class Commentaires {
-    private int id;
+    private String id;
     private User user;
     private String message;
     private Produits produit;
-    private Date date;
+    private String date;
 
-    public Commentaires(User user, String message, Produits produit, Date date) {
+    public Commentaires(User user, String message, Produits produit, String date) {
         this.user = user;
         this.message = message;
         this.produit = produit;
         this.date = date;
     }
 
-    public Commentaires(int id, User user, String message, Produits produit, Date date) {
+    public Commentaires(String id, User user, String message, Produits produit, String date) {
         this.id = id;
         this.user = user;
         this.message = message;
         this.produit = produit;
         this.date = date;
     }
+    
+    public Commentaires(String message) {
+        this.message = message;
+    }
+
+    public Commentaires(String message, Produits produit) {
+        this.message = message;
+        this.produit = produit;
+    }
 
     public Commentaires() {
     }
 
-    public int getId() {
+    @Override
+    public String toString() {
+        return "Commentaires{" + "id=" + id + ", user=" + user + ", message=" + message + ", produit=" + produit + ", date=" + date + '}';
+    }
+
+    
+
+   
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -68,13 +83,17 @@ public class Commentaires {
         this.produit = produit;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
+
+    
+
+    
     
     
 }
