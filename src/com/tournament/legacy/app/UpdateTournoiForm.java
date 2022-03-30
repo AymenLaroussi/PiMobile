@@ -10,17 +10,17 @@ import services.TournoiServices;
 
 import java.io.IOException;
 
-public class AddTournoiForm extends BaseForm {
+public class UpdateTournoiForm extends BaseForm {
 
-    public  AddTournoiForm (Form previous) {
+    public UpdateTournoiForm(Form previous,Tournoi t) {
 
-        setTitle("Add a new tournoi");
+        setTitle("mettre a jour le tournoi");
         setLayout(BoxLayout.y());
-        SpanLabel addLabel = new SpanLabel("Remplir les champs necessaires pour organiser votre tournoi :");
+        SpanLabel addLabel = new SpanLabel("Remplir les champs necessaires pour mettre a jours votre tournoi :");
         addLabel.getAllStyles().setFgColor(0xff000);
         add(addLabel);
 
-        TextField tnom = new TextField("", "Nom");
+        TextField tnom = new TextField("", "tnom", 20, TextArea.ANY);
         TextField tNombreEquipe = new TextField("","Nombre d'equipe");
         TextField tnombreJoueurEquipe = new TextField("","Nombre Joueur par Equipe");
         TextField tprix = new TextField("","Prix");
@@ -35,11 +35,14 @@ public class AddTournoiForm extends BaseForm {
                 Dialog.show("Alert", "Please fill all the fields", new Command("OK"));
                 else {
                     try {
-                        Tournoi t = new Tournoi(tnom.getText(), Integer.parseInt(tNombreEquipe.getText()),Integer.parseInt(tnombreJoueurEquipe.getText()),
-                                Float.parseFloat(tprix.getText())  ,tdiscord.getText());
+                        t.setNom(tnom.getText());
+                        t.setNbr_equipes(Integer.parseInt(tNombreEquipe.getText()));
+                        t.setNbr_joueur_eq(Integer.parseInt(tnombreJoueurEquipe.getText()));
+                        t.setPrix(Float.parseFloat(tprix.getText()));
+                        t.setDiscord_channel(tdiscord.getText());
 //                        Tournoi t = new Tournoi(Integer.parseInt(tfStatus.getText()), tfName.getText().toString());
-                        if (TournoiServices.getInstance().ajoutTournoi(t)) {
-                            Dialog.show("Success", "le tournoi est modifié avec success", new Command("OK"));
+                        if (TournoiServices.getInstance().updateTournoi(t)) {
+                            Dialog.show("Success", "Connection accepted", new Command("OK"));
                         } else
                             Dialog.show("ERROR", "Server error", new Command("OK"));
                     } catch (NumberFormatException | IOException e) {

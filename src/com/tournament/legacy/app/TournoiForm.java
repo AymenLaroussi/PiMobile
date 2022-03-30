@@ -4,12 +4,15 @@ import com.codename1.components.ScaleImageLabel;
 import com.codename1.components.SpanLabel;
 import com.codename1.components.ToastBar;
 import com.codename1.ui.*;
+import com.codename1.ui.events.ActionEvent;
+import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.*;
 import com.codename1.ui.plaf.Style;
 import com.codename1.ui.util.Resources;
 import com.tournament.legacy.entites.Tournoi;
 import services.TournoiServices;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class TournoiForm extends BaseForm{
@@ -97,16 +100,56 @@ public class TournoiForm extends BaseForm{
         addOrientationListener(e -> {
             updateArrowPosition(barGroup.getRadioButton(barGroup.getSelectedIndex()), arrow);
         });
+        ArrayList<Tournoi> list = TournoiServices.getInstance().getAllTournoi();
+        for (Tournoi ex : list) {
+            System.out.println("ok");
+            addButton(res.getImage("news-item-1.jpg"), ex.getNom(),ex);
+
+        }
 
 
-       ArrayList<Tournoi> list = TournoiServices.getInstance().getAllTournoi();
-       for (Tournoi ex : list) {
-           System.out.println("ok");
-           addButton(res.getImage("news-item-1.jpg"), ex.getNom(), false, 26, 32);
-     }
 
    }
+    private void addButton(Image img, String title,Tournoi t) {
+       int height = Display.getInstance().convertToPixels(11.5f);
+        int width = Display.getInstance().convertToPixels(14f);
+        Button image = new Button(img.fill(width, height));
+        image.setUIID("Label");
+        Container cnt = BorderLayout.west(image);
+//        cnt.setLeadComponent(image);
+        TextArea ta = new TextArea(title);
+        ta.setUIID("NewsTopLine");
+        ta.setEditable(false);
 
+//        Label likes = new Label(  " Update  ", "NewsBottomLine");
+//        likes.setTextPosition(RIGHT);
+
+//        FontImage.setMaterialIcon(likes, FontImage.MATERIAL_ALARM);
+        Button update = new Button("Uplate");
+
+        Button delete = new Button("Delete");
+
+
+
+//        Label comments = new Label( " Delete", "NewsBottomLine");
+//        FontImage.setMaterialIcon(likes, FontImage.MATERIAL_CHAT);
+
+
+
+        cnt.add(BorderLayout.CENTER,BoxLayout.encloseX(update, delete));
+        delete.addActionListener(e -> TournoiServices.getInstance().supprimerTournoi(t));
+        update.addActionListener(e -> {
+                new UpdateTournoiForm(current,t).show();
+        });
+
+
+//                        ,
+//
+//                ));
+
+        add(cnt);
+ //       image.addActionListener(e -> ToastBar.showMessage(title, FontImage.MATERIAL_INFO));
+    }
 
 
     private void updateArrowPosition(Button b, Label arrow) {
@@ -152,41 +195,11 @@ public class TournoiForm extends BaseForm{
                 );
 
         swipe.addTab("", page1);
+
     }
 
-    private void addButton(Image img, String title, boolean liked, int likeCount, int commentCount) {
-        int height = Display.getInstance().convertToPixels(11.5f);
-        int width = Display.getInstance().convertToPixels(14f);
-        Button image = new Button(img.fill(width, height));
-        image.setUIID("Label");
-        Container cnt = BorderLayout.west(image);
-        cnt.setLeadComponent(image);
-        TextArea ta = new TextArea(title);
-        ta.setUIID("NewsTopLine");
-        ta.setEditable(false);
-
-        Label likes = new Label(likeCount + " Likes  ", "NewsBottomLine");
-        likes.setTextPosition(RIGHT);
-        if(!liked) {
-            FontImage.setMaterialIcon(likes, FontImage.MATERIAL_FAVORITE);
-        } else {
-            Style s = new Style(likes.getUnselectedStyle());
-            s.setFgColor(0xff2d55);
-            FontImage heartImage = FontImage.createMaterial(FontImage.MATERIAL_FAVORITE, s);
-            likes.setIcon(heartImage);
-        }
-        Label comments = new Label(commentCount + " Comments", "NewsBottomLine");
-        FontImage.setMaterialIcon(likes, FontImage.MATERIAL_CHAT);
 
 
-        cnt.add(BorderLayout.CENTER,
-                BoxLayout.encloseY(
-                        ta,
-                        BoxLayout.encloseX(likes, comments)
-                ));
-        add(cnt);
-        image.addActionListener(e -> ToastBar.showMessage(title, FontImage.MATERIAL_INFO));
-    }
 
     private void bindButtonSelection(Button b, Label arrow) {
         b.addActionListener(e -> {

@@ -48,12 +48,9 @@ public class TournoiServices {
             System.out.println("success");
             for (Map<String, Object> obj : list) {
                 Tournoi t = new Tournoi();
-                if (obj.get("id") == null) {
-                    t.setId(3);
-                } else {
-                    t.setId((int) Float.parseFloat(obj.get("id").toString()));
-                }
+                t.setId((int) Float.parseFloat(obj.get("id").toString()));
                 t.setNom(obj.get("nom").toString());
+
                 Float tmp = Float.parseFloat(obj.get("nbr_equipes").toString());
                 int nb =Math.round(tmp);
                 System.out.println(nb);
@@ -65,8 +62,9 @@ public class TournoiServices {
                 t.setPrix(Float.parseFloat(obj.get("prix").toString()));
                 t.setImage((obj.get("image").toString()));
                 t.setDiscord_channel(obj.get("discord_channel").toString());
-                t.setTime(obj.get("time").toString());
-                t.setTimeEnd(obj.get("timeEnd").toString());
+//                t.setTime(obj.get("time").toString());
+//                t.setTimeEnd(obj.get("timeEnd").toString());
+                System.out.println(t);
                 tournoisl.add(t);
 
             }
@@ -124,6 +122,33 @@ public class TournoiServices {
         return resultOK;
     }
 
+    public boolean updateTournoi(Tournoi t) throws IOException {
+        System.out.println(t);
+        System.out.println("********");
+        String url = Statics.BASE_URL + "/updatetournoiAPI/"+(t.getId());
+//             "/addReclamation?objet=" + tournoi.getNom() + "&nom" + tournoi.getNbr_equipes() + "$nbr_equipes" +
+//                tournoi.getNbr_joueur_eq() + "&nbr_joueur_eq" + tournoi.getPrix() + "$prix" + tournoi.getImage() + "&image" +
+//                tournoi.getDiscord_channel() + "$discord_channel";
+        req.setUrl(url);
+        req.setPost(false);
+        req.addArgument("nom", t.getNom());
+        req.addArgument("nbr_equipes", String.valueOf(t.getNbr_equipes()));
+        req.addArgument("nbr_joueur_eq", String.valueOf(t.getNbr_joueur_eq()));
+        req.addArgument("prix", String.valueOf(t.getPrix()));
+        req.addArgument("discord_channel", String.valueOf(t.getDiscord_channel()));
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                resultOK = req.getResponseCode() == 200; //Code HTTP 200 OK
+                req.removeResponseListener(this);
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        Map<String,Object> result = new JSONParser().parseJSON(new InputStreamReader(new ByteArrayInputStream(req.getResponseData()), "UTF-8"));
+        System.out.println(result);
+        return resultOK;
+    }
+
     public void ajouterTournoi(Tournoi t) {
         try {
             db = Database.openOrCreate("tournoi");
@@ -141,5 +166,17 @@ public class TournoiServices {
         } catch (IOException ex) {
             System.out.println("erreur");
         }
+    }
+    public void supprimerTournoi(Tournoi t){
+        String url = Statics.BASE_URL + "/removeTournoiAPI?id="+(t.getId()) ;
+        System.out.println("************");
+        req.setUrl(url);
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                req.removeResponseListener(this);
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
     }
 }

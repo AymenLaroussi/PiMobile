@@ -32,6 +32,17 @@ id=-1;
         this.discord_channel = discord_channel;
 
     }
+    public Tournoi ( String nom, int nbr_equipes, int nbr_joueur_eq, float prix,
+                      String discord_channel) {
+
+        this.nom = nom;
+        this.nbr_equipes = nbr_equipes;
+        this.nbr_joueur_eq = nbr_joueur_eq;
+        this.prix = prix;
+
+        this.discord_channel = discord_channel;
+
+    }
 
     public int getId() {
         return id;
