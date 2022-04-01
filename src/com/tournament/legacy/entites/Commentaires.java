@@ -13,17 +13,19 @@ public class Commentaires {
     private String id;
     private String user;
     private String message;
-    private Produits produit;
+    private String produit;
     private String date;
 
-    public Commentaires(String user, String message, Produits produit, String date) {
+    public Commentaires(String user, String message, String produit, String date) {
         this.user = user;
         this.message = message;
         this.produit = produit;
         this.date = date;
     }
 
-    public Commentaires(String id, String user, String message, Produits produit, String date) {
+    
+
+    public Commentaires(String id, String user, String message, String produit, String date) {
         this.id = id;
         this.user = user;
         this.message = message;
@@ -35,7 +37,7 @@ public class Commentaires {
         this.message = message;
     }
 
-    public Commentaires(String message, Produits produit) {
+    public Commentaires(String message, String produit) {
         this.message = message;
         this.produit = produit;
     }
@@ -69,10 +71,7 @@ public class Commentaires {
         this.date = date;
     }
 
-    public Commentaires(String user, String message) {
-        this.user = user;
-        this.message = message;
-    }
+   
 
     public void setUser(String user) {
         this.user = user;
@@ -86,11 +85,11 @@ public class Commentaires {
         this.message = message;
     }
 
-    public Produits getProduit() {
+    public String getProduit() {
         return produit;
     }
 
-    public void setProduit(Produits produit) {
+    public void setProduit(String produit) {
         this.produit = produit;
     }
 
