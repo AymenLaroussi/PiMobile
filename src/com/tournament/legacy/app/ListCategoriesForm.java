@@ -48,8 +48,7 @@ public class ListCategoriesForm extends Form {
             sp.setTextLine2("Nom : "+cat.getNom());
             list1.add(LabelUser);
             list1.add(sp);
-            btnSuppriemr.addActionListener(e-> ServiceCategorie.getInstance().supprimerCategories(cat.getId()));
-            add(btnSuppriemr);
+            
 
         }
 
