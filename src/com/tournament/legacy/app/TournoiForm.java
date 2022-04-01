@@ -32,7 +32,9 @@ public class TournoiForm extends BaseForm{
         tb.addSearchCommand(e -> {
         });
         Tabs swipe = new Tabs();
-        Label spacer1 = new Label();
+        Label spacer1 = new Label(
+
+        );
         Label spacer2 = new Label();
         addTab(swipe, res.getImage("blog-img-1-4.jpg"), spacer1, "15 Likes  ", "85 Comments", "Organiser votre tournoi en ligne   ");
         addTab(swipe, res.getImage("tournoi2.jpg"), spacer2, "100 Likes  ", "66 Comments", "Choisir le tournoi qui vous plaisez et rejoindre une equipe pour jouer avec  ");
@@ -119,12 +121,12 @@ public class TournoiForm extends BaseForm{
             ArrayList<Tournoi> list = TournoiServices.getInstance().getAllTournoi();
             for (Tournoi ex : list) {
                 System.out.println("ok");
-                addButton(res.getImage("tournoi2.jpg"), ex.getNom(), ex);
+                addButton(res.getImage("tournoi2.jpg"), ex.getNom(), ex,res);
             }
         }
 
    }
-    private void addButton(Image img, String title,Tournoi t) {
+    private void addButton(Image img, String title,Tournoi t,Resources res) {
        int height = Display.getInstance().convertToPixels(11.5f);
         int width = Display.getInstance().convertToPixels(14f);
         Button image = new Button(img.fill(width, height));
@@ -157,7 +159,10 @@ public class TournoiForm extends BaseForm{
         ));
         delete.addActionListener(e -> TournoiServices.getInstance().supprimerTournoi(t));
         update.addActionListener(e ->  new UpdateTournoiForm(current,t).show());
-        image.addActionListener(e -> new DetailTournoiForm(current,t));
+        image.addActionListener(e ->{
+                    new DetailTournoiForm(current,t,res).show();
+
+        } );
 
         add(cnt);
 
