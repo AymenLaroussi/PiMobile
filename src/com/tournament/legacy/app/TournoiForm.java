@@ -132,6 +132,10 @@ public class TournoiForm extends BaseForm{
         Button image = new Button(img.fill(width, height));
         image.setUIID("Label");
         Container cnt = BorderLayout.west(image);
+        image.addActionListener(e ->{
+            new DetailTournoiForm(current,t,res).show();
+
+        } );
 //        cnt.setLeadComponent(image);
         TextArea ta = new TextArea(title);
         ta.setUIID("NewsTopLine");
@@ -159,10 +163,7 @@ public class TournoiForm extends BaseForm{
         ));
         delete.addActionListener(e -> TournoiServices.getInstance().supprimerTournoi(t));
         update.addActionListener(e ->  new UpdateTournoiForm(current,t).show());
-        image.addActionListener(e ->{
-                    new DetailTournoiForm(current,t,res).show();
 
-        } );
 
         add(cnt);
 

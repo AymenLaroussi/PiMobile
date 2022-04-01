@@ -15,18 +15,18 @@ public class DetailTournoiForm extends BaseForm{
         SpanLabel addLabel = new SpanLabel("Tournoi :"+t.getNom());
         addLabel.getAllStyles().setFgColor(0xff000);
         add(addLabel);
-        addButton( res.getImage("tournoi2.jpg"),t.getNom(), t,res,previous);
+        addButton( res.getImage("tournoi2.jpg"),t.getNom(), t,previous);
 
     }
-    private void addButton(Image img, String title, Tournoi t,Resources res,Form previous) {
-        int height = Display.getInstance().convertToPixels(11.5f);
-        int width = Display.getInstance().convertToPixels(14f);
+    private void addButton(Image img, String title, Tournoi t,Form previous) {
+        int height = Display.getInstance().convertToPixels(41.5f);
+        int width = Display.getInstance().convertToPixels(54f);
         Button image = new Button(img.fill(width, height));
         image.setUIID("Label");
-        Container cnt = BorderLayout.west(image);
+        Container cnt = BorderLayout.north(image);
 
-        TextArea ta = new TextArea(title);
-        ta.setUIID("NewsTopLine");
+        TextArea ta = new TextArea("Nom :"+t.getNom());
+        ta.setUIID("BlackTextField");
         ta.setEditable(false);
 
         TextArea discord = new TextArea("Discord: "+t.getDiscord_channel());
@@ -38,6 +38,9 @@ public class DetailTournoiForm extends BaseForm{
         ta.setEditable(false);
 
         TextArea nombreJ = new TextArea("Nombre d'equipe: "+ String.valueOf(t.getNbr_joueur_eq()));
+        ta.setUIID("NewsTopLine");
+        ta.setEditable(false);
+        TextArea prix = new TextArea("Montant à gagné: "+ String.valueOf((int)t.getPrix()));
         ta.setUIID("NewsTopLine");
         ta.setEditable(false);
 
@@ -58,13 +61,13 @@ public class DetailTournoiForm extends BaseForm{
 
 
         cnt.add(BorderLayout.CENTER, BoxLayout.encloseY(
-                ta,nombreEq,nombreJ,discord,
-                BoxLayout.encloseX(update, delete)
+                ta,nombreEq,nombreJ,discord,prix
+
         ));
 
 
         add(cnt);
-        btnRetour.addActionListener(e -> previous.showBack());
+
         getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e -> previous.showBack());
 
         //       image.addActionListener(e -> ToastBar.showMessage(title, FontImage.MATERIAL_INFO));

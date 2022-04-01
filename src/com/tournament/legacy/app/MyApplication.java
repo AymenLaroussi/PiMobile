@@ -42,7 +42,7 @@ public class MyApplication {
     }
     
     public void start() {
-        new ListCommentairesForm(theme).show();
+        new WalkthruForm(theme).show();
     }
 
     public void stop() {
