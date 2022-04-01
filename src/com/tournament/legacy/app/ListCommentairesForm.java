@@ -27,26 +27,29 @@ public class ListCommentairesForm extends Form {
     Button btnSuppriemr = new Button("X");
     public ListCommentairesForm(Form previous){
         setTitle("Liste des  commentaires");
-        add(new Label("Liste des  commentaires /n"));
-        
+        add(new Label("Liste des  commentaires "));
         ArrayList<Commentaires> list = ServiceCommentaire.getInstance().ListeCommentaires();
+        Form hi = new Form("Table Layout 2x2", new TableLayout(1, 5));
+        hi.add("id");
+        hi.add("message");
+        hi.add("date");
+        hi.add("produit");
+        hi.add("utilisateur");
+        hi.add("action");
+        
+        
         for ( Commentaires c : list){
-            System.out.println(c.getMessage());
             btnSuppriemr.addActionListener(e-> ServiceCommentaire.getInstance().supprimerCommentaire(c.getId()));
-            
-         add(new Label(c.getId()));   
-         add(new Label(c.getMessage()));
-         addAll(btnSuppriemr);
+        Form hi1 = new Form("Table Layout 2x2", new TableLayout(1, 5));
+            hi1.add(new Label(c.getId().toString())).
+            add(new Label(c.getMessage().toString())).
+            add(btnSuppriemr);
+        hi.show();
+        
         }
           
           
-        Form hi = new Form("Table Layout 2x2", new TableLayout(2, 2));
-        hi.add(new Label("First")).
-            add(new Label("Second")).
-            add(new Label("Third")).
-            add(new Label("Fourth")).
-            add(new Label("Fifth"));
-        hi.show();
+        
         
 
         getToolbar().addMaterialCommandToLeftBar("",FontImage.MATERIAL_ARROW_BACK, e->previous.showBack());
