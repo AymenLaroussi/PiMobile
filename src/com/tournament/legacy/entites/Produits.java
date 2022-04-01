@@ -12,7 +12,7 @@ package com.tournament.legacy.entites;
 public class Produits {
     // Déclaration des attributs du Produits
     
-    private int id;
+    private String id;
     private String titre;
     private String description;
     private String promo;
@@ -23,17 +23,20 @@ public class Produits {
     private String longdescription;
     private String prix;
     private String categories;
-    public Produits(int id, String titre, String description, String promo, String stock, String ref, String longdescription, String prix, String categories) {
+
+    public Produits(String id, String titre, String promo) {
         this.id = id;
         this.titre = titre;
-        this.description = description;
+        this.promo = promo;
+    }
+
+    public Produits(String id, String titre, String promo, String stock) {
+        this.id = id;
+        this.titre = titre;
         this.promo = promo;
         this.stock = stock;
-        this.ref = ref;
-        this.longdescription = longdescription;
-        this.prix = prix;
-        this.categories = categories;
     }
+    
 
     public Produits(String titre, String description, String promo, String stock, String ref, String longdescription, String prix, String categories) {
         this.titre = titre;
@@ -48,18 +51,9 @@ public class Produits {
     
 
     
-    public Produits(int id, String titre, String description, String promo, String ref, String longdescription, String prix, String categories) {
-        this.id = id;
-        this.titre = titre;
-        this.description = description;
-        this.promo = promo;
-        this.ref = ref;
-        this.longdescription = longdescription;
-        this.prix = prix;
-        this.categories = categories;
-    }
+    
 
-    public Produits(int id, String titre, String description, String promo, String stock, String flash, String image, String ref, String longdescription, String prix, String categories) {
+    public Produits(String id, String titre, String description, String promo, String stock, String flash, String image, String ref, String longdescription, String prix, String categories) {
         this.id = id;
         this.titre = titre;
         this.description = description;
@@ -85,8 +79,10 @@ public class Produits {
         this.stock = stock;
     }
    
-
-    public Produits(int id, String titre, String description, String promo, String flash, String image, String ref, String longdescription, String prix, String categories) {
+    public Produits(String id){
+this.id= id;       
+}
+    public Produits(String id, String titre, String description, String promo, String flash, String image, String ref, String longdescription, String prix, String categories) {
         this.id = id;
         this.titre = titre;
         this.description = description;
@@ -111,11 +107,11 @@ public class Produits {
         this.categories = categories;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

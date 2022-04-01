@@ -11,19 +11,19 @@ package com.tournament.legacy.entites;
  */
 public class Commentaires {
     private String id;
-    private User user;
+    private String user;
     private String message;
     private Produits produit;
     private String date;
 
-    public Commentaires(User user, String message, Produits produit, String date) {
+    public Commentaires(String user, String message, Produits produit, String date) {
         this.user = user;
         this.message = message;
         this.produit = produit;
         this.date = date;
     }
 
-    public Commentaires(String id, User user, String message, Produits produit, String date) {
+    public Commentaires(String id, String user, String message, Produits produit, String date) {
         this.id = id;
         this.user = user;
         this.message = message;
@@ -59,11 +59,22 @@ public class Commentaires {
         this.id = id;
     }
 
-    public User getUser() {
+    public String getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public Commentaires(String id, String message, String date) {
+        this.id = id;
+        this.message = message;
+        this.date = date;
+    }
+
+    public Commentaires(String user, String message) {
+        this.user = user;
+        this.message = message;
+    }
+
+    public void setUser(String user) {
         this.user = user;
     }
 

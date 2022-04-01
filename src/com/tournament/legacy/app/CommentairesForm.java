@@ -13,7 +13,7 @@ import com.codename1.ui.util.Resources;
 
 /**
  *
- * @author aymen
+ * @author Aymen Laroussi
  */
 public class CommentairesForm extends Form {
     Form current;
@@ -29,7 +29,6 @@ public class CommentairesForm extends Form {
         Button btnSuppriemr = new Button("Supprimer un commentaire");
         btnAjout.addActionListener(e-> new AjoutCommentaireForm(res,current).show());
         btnListe.addActionListener(e-> new ListCommentairesForm(current).show());
-        btnSuppriemr.addActionListener(e-> new SupprimerCommentaireForm(res,current).show());
         addAll(btnAjout, btnListe,btnSuppriemr);
         
 }
