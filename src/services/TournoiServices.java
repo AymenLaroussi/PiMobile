@@ -75,7 +75,23 @@ public class TournoiServices {
         return tournoisl;
     }
 //
-
+   public ArrayList<Tournoi> getTournoi(Tournoi t) {
+    req = new ConnectionRequest();
+    //String url = Statics.BASE_URL+"/tasks/";
+    String url = Statics.BASE_URL + "/getTournoiAPI/"+(t.getId());
+    System.out.println("===>" + url);
+    req.setUrl(url);
+    req.setPost(false);
+    req.addResponseListener(new ActionListener<NetworkEvent>() {
+        @Override
+        public void actionPerformed(NetworkEvent evt) {
+            tournoisl = parseTournois(new String(req.getResponseData()));
+            req.removeResponseListener(this);
+        }
+    });
+    NetworkManager.getInstance().addToQueueAndWait(req);
+    return tournoisl;
+}
     public ArrayList<Tournoi> getAllTournoi() {
         req = new ConnectionRequest();
         //String url = Statics.BASE_URL+"/tasks/";
@@ -97,7 +113,7 @@ public class TournoiServices {
     public boolean ajoutTournoi(Tournoi t,String jeu) throws IOException {
         System.out.println(t);
         System.out.println("********");
-        String url = Statics.BASE_URL + "/addtournoiAPI";
+        String url = Statics.BASE_URL + "/addtournoiAPI" ;
 //             "/addReclamation?objet=" + tournoi.getNom() + "&nom" + tournoi.getNbr_equipes() + "$nbr_equipes" +
 //                tournoi.getNbr_joueur_eq() + "&nbr_joueur_eq" + tournoi.getPrix() + "$prix" + tournoi.getImage() + "&image" +
 //                tournoi.getDiscord_channel() + "$discord_channel";
@@ -125,15 +141,13 @@ public class TournoiServices {
     public boolean updateTournoi(Tournoi t) throws IOException {
         System.out.println(t);
         System.out.println("********");
-        String url = Statics.BASE_URL + "/updatetournoiAPI/"+(t.getId());
+        String url = Statics.BASE_URL + "/updateTournoiAPI/"+(t.getId());
 //             "/addReclamation?objet=" + tournoi.getNom() + "&nom" + tournoi.getNbr_equipes() + "$nbr_equipes" +
 //                tournoi.getNbr_joueur_eq() + "&nbr_joueur_eq" + tournoi.getPrix() + "$prix" + tournoi.getImage() + "&image" +
 //                tournoi.getDiscord_channel() + "$discord_channel";
         req.setUrl(url);
         req.setPost(false);
         req.addArgument("nom", t.getNom());
-        req.addArgument("nbr_equipes", String.valueOf(t.getNbr_equipes()));
-        req.addArgument("nbr_joueur_eq", String.valueOf(t.getNbr_joueur_eq()));
         req.addArgument("prix", String.valueOf(t.getPrix()));
         req.addArgument("discord_channel", String.valueOf(t.getDiscord_channel()));
         req.addResponseListener(new ActionListener<NetworkEvent>() {

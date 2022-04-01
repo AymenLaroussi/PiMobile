@@ -27,10 +27,6 @@ public class UpdateTournoiForm extends BaseForm {
         TextField tnom = new TextField("", t.getNom());
         tnom.setUIID("TextFieldBlack");
 
-        TextField tNombreEquipe = new TextField("", String.valueOf(t.getNbr_equipes()));
-        tNombreEquipe.setUIID("TextFieldBlack");
-        TextField tnombreJoueurEquipe = new TextField("", String.valueOf(t.getNbr_joueur_eq()));
-        tnombreJoueurEquipe.setUIID("TextFieldBlack");
         TextField tprix = new TextField("", String.valueOf(t.getPrix()));
         tprix.setUIID("TextFieldBlack");
         TextField tdiscord = new TextField("", t.getDiscord_channel());
@@ -38,25 +34,6 @@ public class UpdateTournoiForm extends BaseForm {
 //        Picker dateTimePicker = new Picker();
 //        dateTimePicker.setType(Display.PICKER_TYPE_DATE_AND_TIME);
 //        dateTimePicker.setDate(new Date());
-        Picker jeuPicker = new Picker();
-        jeuPicker.setUIID("TextFieldBlack");
-
-        jeuPicker.setType(Display.PICKER_TYPE_STRINGS);
-        ArrayList<Jeu> jeux = new ArrayList<>();
-        jeux = JeuServices.getInstance().getAllJeu();
-        jeuPicker.setSelectedString(jeux.get(0).getNom());
-        jeuPicker.setStrings(jeux.get(0).getNom());
-        if (jeux.size() > 1) {
-
-            jeuPicker.setStrings(jeux.get(0).getNom(),
-                    jeux.get(1).getNom());
-        }
-        if (jeux.size() > 2) {
-            jeuPicker.setStrings(jeux.get(0).getNom(),
-                    jeux.get(1).getNom(),
-                    jeux.get(2).getNom()
-            );
-        }
 
 
         Button btnValider = new Button("update tournoi");
@@ -66,14 +43,22 @@ public class UpdateTournoiForm extends BaseForm {
             @Override
             public void actionPerformed(ActionEvent evt) {
 
-                if ((tnom.getText().length() == 0) || (tNombreEquipe.getText().length() == 0) || (tnombreJoueurEquipe.getText().length() == 0) ||
-                        (tprix.getText().length() == 0) || (tdiscord.getText().length() == 0) || jeuPicker.getText().length() == 0)
-                    Dialog.show("Alert", "Please fill all the fields", new Command("OK"));
-                else {
                     try {
-                        Tournoi t = new Tournoi(tnom.getText(), Integer.parseInt(tNombreEquipe.getText()), Integer.parseInt(tnombreJoueurEquipe.getText()),
-                                Float.parseFloat(tprix.getText()), tdiscord.getText());
-                        if (TournoiServices.getInstance().ajoutTournoi(t, jeuPicker.getText())) {
+                        if (tnom.getText().length()!= 0) {
+                            t.setNom(tnom.getText());
+                            System.out.println(tnom.getText());
+                        }
+                        if (tprix.getText().length()!= 0) {
+                            t.setPrix(Float.parseFloat(tprix.getText()));
+                        }
+                        if (tdiscord.getText().length()!= 0) {
+                            t.setDiscord_channel(tdiscord.getText());
+                        }
+
+
+//                                (tnom.getText(), Integer.parseInt(tNombreEquipe.getText()), Integer.parseInt(tnombreJoueurEquipe.getText()),
+//                                Float.parseFloat(tprix.getText()), tdiscord.getText());
+                        if (TournoiServices.getInstance().updateTournoi(t)) {
                             Dialog.show("Success", "le tournoi est modifié avec succes", new Command("OK"));
 //                            new TournoiForm(previous).show();
 
@@ -86,12 +71,13 @@ public class UpdateTournoiForm extends BaseForm {
                 }
 
 
-            }
+
+
         });
         btnRetour.addActionListener(e -> previous.showBack());
 
 
-        addAll(tnom, tNombreEquipe,tnombreJoueurEquipe,tprix,tdiscord,jeuPicker, btnValider,btnRetour);
+        addAll(tnom,tprix,tdiscord, btnValider,btnRetour);
         getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e -> previous.showBack());
 
     }

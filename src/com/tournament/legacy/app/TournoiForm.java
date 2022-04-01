@@ -157,6 +157,7 @@ public class TournoiForm extends BaseForm{
         ));
         delete.addActionListener(e -> TournoiServices.getInstance().supprimerTournoi(t));
         update.addActionListener(e ->  new UpdateTournoiForm(current,t).show());
+        image.addActionListener(e -> new DetailTournoiForm(current,t));
 
         add(cnt);
 
