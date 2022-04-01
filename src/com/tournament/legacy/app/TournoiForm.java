@@ -17,6 +17,7 @@ import java.util.ArrayList;
 
 public class TournoiForm extends BaseForm{
     Form  current;
+    static boolean show =true ;
     public TournoiForm (Resources res) {
 
         super("Tournoi", BoxLayout.y());
@@ -26,9 +27,7 @@ public class TournoiForm extends BaseForm{
         getTitleArea().setUIID("Container");
         setTitle("Tournoi");
         getContentPane().setScrollVisible(false);
-        tb.addMaterialCommandToRightBar("suivant", FontImage.MATERIAL_ARROW_RIGHT, e -> {
-            new AddTournoiForm(current).show();
-        });
+
         super.addSideMenu(res);
         tb.addSearchCommand(e -> {
         });
@@ -78,6 +77,7 @@ public class TournoiForm extends BaseForm{
         ButtonGroup barGroup = new ButtonGroup();
         RadioButton all = RadioButton.createToggle("Tournois disponibles", barGroup);
         all.setUIID("SelectBar");
+
         RadioButton featured = RadioButton.createToggle("Mes tournois", barGroup);
         featured.setUIID("SelectBar");
         Label arrow = new Label(res.getImage("news-tab-down-arrow.png"), "Container");
@@ -86,6 +86,8 @@ public class TournoiForm extends BaseForm{
                 GridLayout.encloseIn(2, all, featured),
                 FlowLayout.encloseBottom(arrow)
         ));
+
+
 
         all.setSelected(true);
         arrow.setVisible(false);
@@ -100,14 +102,26 @@ public class TournoiForm extends BaseForm{
         addOrientationListener(e -> {
             updateArrowPosition(barGroup.getRadioButton(barGroup.getSelectedIndex()), arrow);
         });
-        ArrayList<Tournoi> list = TournoiServices.getInstance().getAllTournoi();
-        for (Tournoi ex : list) {
-            System.out.println("ok");
-            addButton(res.getImage("news-item-1.jpg"), ex.getNom(),ex);
 
+        all.addActionListener(actionEvent -> {
+            TournoiForm.show = true;
+            new TournoiForm(res).show();
+
+
+        });
+        featured.addActionListener(actionEvent -> {
+            TournoiForm.show = false;
+            new TournoiForm(res).show();
+
+
+        });
+        if (show) {
+            ArrayList<Tournoi> list = TournoiServices.getInstance().getAllTournoi();
+            for (Tournoi ex : list) {
+                System.out.println("ok");
+                addButton(res.getImage("tournoi2.jpg"), ex.getNom(), ex);
+            }
         }
-
-
 
    }
     private void addButton(Image img, String title,Tournoi t) {
@@ -120,6 +134,7 @@ public class TournoiForm extends BaseForm{
         TextArea ta = new TextArea(title);
         ta.setUIID("NewsTopLine");
         ta.setEditable(false);
+
 
 //        Label likes = new Label(  " Update  ", "NewsBottomLine");
 //        likes.setTextPosition(RIGHT);
@@ -136,18 +151,15 @@ public class TournoiForm extends BaseForm{
 
 
 
-        cnt.add(BorderLayout.CENTER,BoxLayout.encloseX(update, delete));
+        cnt.add(BorderLayout.CENTER, BoxLayout.encloseY(
+                ta,
+                BoxLayout.encloseX(update, delete)
+        ));
         delete.addActionListener(e -> TournoiServices.getInstance().supprimerTournoi(t));
-        update.addActionListener(e -> {
-                new UpdateTournoiForm(current,t).show();
-        });
-
-
-//                        ,
-//
-//                ));
+        update.addActionListener(e ->  new UpdateTournoiForm(current,t).show());
 
         add(cnt);
+
  //       image.addActionListener(e -> ToastBar.showMessage(title, FontImage.MATERIAL_INFO));
     }
 
@@ -180,6 +192,8 @@ public class TournoiForm extends BaseForm{
         image.setUIID("Container");
         image.setBackgroundType(Style.BACKGROUND_IMAGE_SCALED_FILL);
         Label overlay = new Label(" ", "ImageOverlay");
+        Button ajout = new Button("Organiser tournoi");
+        ajout.addActionListener(actionEvent ->  new AddTournoiForm(current).show());
 
         Container page1 =
                 LayeredLayout.encloseIn(
@@ -188,7 +202,7 @@ public class TournoiForm extends BaseForm{
                         BorderLayout.south(
                                 BoxLayout.encloseY(
                                         new SpanLabel(text, "LargeWhiteText"),
-                                        FlowLayout.encloseIn(likes, comments),
+                                        FlowLayout.encloseIn(ajout, comments),
                                         spacer
                                 )
                         )
