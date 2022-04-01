@@ -13,6 +13,7 @@ import com.codename1.ui.Container;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.Label;
+import com.codename1.ui.geom.Dimension;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.table.TableLayout;
 import com.codename1.ui.util.Resources;
@@ -39,24 +40,29 @@ public class ListCommentairesForm extends Form {
 
             SpanLabel LabelComent = new SpanLabel();
             MultiButton sp = new MultiButton();
-            sp.getAllStyles().setFgColor(0x350a4e);
+            sp.getAllStyles().setFgColor(0x350afe);
             Label l = new Label(" ");
 
             
 
             sp.setText("Id : "+coment.getId());
-            sp.setTextLine2("message : "+coment.getMessage());
-            sp.setTextLine2("Date : "+coment.getDate());
+            sp.setTextLine1("Utilisateur : "+coment.getUser());
+            sp.setTextLine2("Produit : "+coment.getProduit());
+            sp.setTextLine3("Date : "+coment.getDate());
+            sp.setTextLine4("message : "+coment.getMessage());
             
             list1.add(LabelComent);
             list1.add(sp);
             
+            
+            
 
         }
+        
 
         getToolbar().addMaterialCommandToLeftBar("",FontImage.MATERIAL_ARROW_BACK, (evt) -> {
 
-            new com.tournament.legacy.app.CategorieForm(res).show();
+            new com.tournament.legacy.app.CommentairesForm(res).show();
 
         });
 

@@ -44,7 +44,7 @@ public class AjoutCommentaireForm extends Form {
         message.setUIID("TextFieldBlack");
        addStringValue("Commentaire",message);
        
-        TextField produit = new TextField("","entrer l' id  du produit !!");
+        TextField produit = new TextField("","entrer l'ID  du produit !!");
         produit.setUIID("TextFieldBlack");
        addStringValue("Produit",produit);
        

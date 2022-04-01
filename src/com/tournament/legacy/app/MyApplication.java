@@ -42,7 +42,7 @@ public class MyApplication {
     }
     
     public void start() {
-        new ProduitsfeedForm1(theme).show();
+        new ListCommentairesForm(theme).show();
     }
 
     public void stop() {

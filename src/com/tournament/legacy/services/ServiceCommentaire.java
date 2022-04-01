@@ -122,10 +122,18 @@ public class ServiceCommentaire {
                 s = String.valueOf(nb);
                 
                 c.setId((s.toString()));
-                c.setId((obj.get("id").toString()));
+                String test1 = obj.get("user").toString();
+                String test2 = (test1.substring((test1).indexOf("username=")+9 ,(test1).indexOf("}"))).toString();
+                c.setUser(test2.toString());
+                
+                String test3 = obj.get("produit").toString();
+                String test4 = (test3.substring((test3).indexOf("titre=")+6 ,(test3).indexOf("}"))).toString();
+                
+                
+                c.setProduit(test4.toString());
                 c.setMessage((obj.get("message").toString()));
                 c.setDate((obj.get("date").toString()));
-                
+               
                 coment.add(c);
             }
         } catch (IOException ex) {
