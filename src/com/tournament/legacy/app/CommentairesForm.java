@@ -28,7 +28,7 @@ public class CommentairesForm extends Form {
         Button btnListe = new Button("Liste des commentaires");
         Button btnSuppriemr = new Button("Supprimer un commentaire");
         btnAjout.addActionListener(e-> new AjoutCommentaireForm(res,current).show());
-        btnListe.addActionListener(e-> new ListCommentairesForm(current).show());
+        btnListe.addActionListener(e-> new ListCommentairesForm(res).show());
         addAll(btnAjout, btnListe,btnSuppriemr);
         
 }

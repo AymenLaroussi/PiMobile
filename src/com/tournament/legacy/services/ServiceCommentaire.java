@@ -116,7 +116,12 @@ public class ServiceCommentaire {
                 
                 Commentaires c = new Commentaires();
                 
+                String s;
+                int test=(int) Float.parseFloat(obj.get("id").toString());
+                int nb =Math.round(test);
+                s = String.valueOf(nb);
                 
+                c.setId((s.toString()));
                 c.setId((obj.get("id").toString()));
                 c.setMessage((obj.get("message").toString()));
                 c.setDate((obj.get("date").toString()));

@@ -64,8 +64,12 @@ public class ServiceCategorie {
             
             for (Map<String,Object> obj : list){
                 Categories c = new Categories();
+                String s;
+                int test=(int) Float.parseFloat(obj.get("id").toString());
+                int nb =Math.round(test);
+                s = String.valueOf(nb);
                 
-                c.setId(obj.get("id").toString());
+                c.setId((s.toString()));
                 c.setNom(obj.get("nom").toString());
                 categories.add(c);
             }
