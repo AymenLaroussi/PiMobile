@@ -7,7 +7,7 @@ package com.tournament.legacy.utils;
 
 /**
  *
- * @author aymen
+ * @author Aymen Laroussi
  */
 public class Statics {
     public static final String BASE_URL="http://127.0.0.1:8000";

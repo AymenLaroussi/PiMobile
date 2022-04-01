@@ -39,7 +39,7 @@ import com.codename1.ui.util.Resources;
 /**
  * The user profile form
  *
- * @author Shai Almog
+ * @author Aymen Laroussi
  */
 public class ProfileForm extends BaseForm {
 
