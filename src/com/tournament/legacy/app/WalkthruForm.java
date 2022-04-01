@@ -40,7 +40,7 @@ import com.codename1.ui.util.Resources;
 /**
  * Swiping thru tutorial
  *
- * @author Shai Almog
+ * @author Aymen Laroussi
  */
 public class WalkthruForm extends Form {
 

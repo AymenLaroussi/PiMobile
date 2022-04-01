@@ -20,6 +20,7 @@
 package com.tournament.legacy.app;
 
 
+import com.codename1.components.FloatingHint;
 import com.codename1.components.ScaleImageLabel;
 import com.codename1.components.SpanLabel;
 import com.codename1.components.ToastBar;
@@ -44,6 +45,7 @@ import com.codename1.ui.layouts.LayeredLayout;
 import com.codename1.ui.plaf.Style;
 import com.codename1.ui.util.Resources;
 import com.tournament.legacy.entites.Produits;
+import com.tournament.legacy.services.ServiceCommentaire;
 import com.tournament.legacy.services.ServiceProduits;
 import java.util.ArrayList;
 
@@ -52,9 +54,9 @@ import java.util.ArrayList;
  *
  * @author Aymen Laroussi
  */
-public class NewsfeedForm extends BaseForm {
-
-    public NewsfeedForm(Resources res) {
+public class TriProduitsfeedForm extends BaseForm {
+  Button btnSuppriemr = new Button("X");
+    public TriProduitsfeedForm(Resources res) {
         super("Newsfeed", BoxLayout.y());
         Toolbar tb = new Toolbar(true);
         setToolbar(tb);
@@ -69,8 +71,7 @@ public class NewsfeedForm extends BaseForm {
 
         Label spacer1 = new Label();
         Label spacer2 = new Label();
-        addTab(swipe, res.getImage("news-item.jpg"), spacer1, "15 Likes  ", "85 Comments", "Integer ut placerat purued non dignissim neque. ");
-        addTab(swipe, res.getImage("dog.jpg"), spacer2, "100 Likes  ", "66 Comments", "Dogs are cute: story at 11");
+        addTab(swipe, spacer1, "BOUTIQUE");
                 
         swipe.setUIID("Container");
         swipe.getContentPane().setUIID("Container");
@@ -138,6 +139,7 @@ public class NewsfeedForm extends BaseForm {
         bindButtonSelection(myFavorite, arrow);
         
         // special case for rotation
+        
         addOrientationListener(e -> {
             updateArrowPosition(barGroup.getRadioButton(barGroup.getSelectedIndex()), arrow);
         });
@@ -145,15 +147,18 @@ public class NewsfeedForm extends BaseForm {
         
         ArrayList<Produits> list = ServiceProduits.getInstance().ListeProduits();
         for ( Produits c : list){
-           
+         
+            String id = c.getId().toString();
+            String titre = c.getTitre().toString();
+            String description = c.getDescription().toString();
+            String prix = c.getPrix().toString()+" TND";
+            String ld = c.getLongdescription().toString();
+            String ref = c.getRef().toString();
             
+            
+        addButton(res.getImage("news-item-1.jpg"), titre,prix, false, 26, 32,res,id,titre,description,ld,ref);
         
         
-        
-        
-        
-        addButton(res.getImage("news-item-1.jpg"), c.getTitre().toString(),c.getPromo().toString(), false, 26, 32);
-            add(new Button(""));
     }}
     
     private void updateArrowPosition(Button b, Label arrow) {
@@ -163,36 +168,27 @@ public class NewsfeedForm extends BaseForm {
         
     }
     
-    private void addTab(Tabs swipe, Image img, Label spacer, String likesStr, String commentsStr, String text) {
+    private void addTab(Tabs swipe,  Label spacer, String text) {
         int size = Math.min(Display.getInstance().getDisplayWidth(), Display.getInstance().getDisplayHeight());
-        if(img.getHeight() < size) {
-            img = img.scaledHeight(size);
-        }
-        Label likes = new Label(likesStr);
-        Style heartStyle = new Style(likes.getUnselectedStyle());
-        heartStyle.setFgColor(0xff2d55);
-        FontImage heartImage = FontImage.createMaterial(FontImage.MATERIAL_FAVORITE, heartStyle);
-        likes.setIcon(heartImage);
-        likes.setTextPosition(RIGHT);
+        
+        
+        
+        
 
-        Label comments = new Label(commentsStr);
-        FontImage.setMaterialIcon(comments, FontImage.MATERIAL_CHAT);
-        if(img.getHeight() > Display.getInstance().getDisplayHeight() / 2) {
-            img = img.scaledHeight(Display.getInstance().getDisplayHeight() / 2);
-        }
-        ScaleImageLabel image = new ScaleImageLabel(img);
-        image.setUIID("Container");
-        image.setBackgroundType(Style.BACKGROUND_IMAGE_SCALED_FILL);
+        
+        
+        
+        
         Label overlay = new Label(" ", "ImageOverlay");
         
         Container page1 = 
             LayeredLayout.encloseIn(
-                image,
+                
                 overlay,
                 BorderLayout.south(
                     BoxLayout.encloseY(
                             new SpanLabel(text, "LargeWhiteText"),
-                            FlowLayout.encloseIn(likes, comments),
+                            FlowLayout.encloseIn(),
                             spacer
                         )
                 )
@@ -201,7 +197,7 @@ public class NewsfeedForm extends BaseForm {
         swipe.addTab("", page1);
     }
     
-   private void addButton(Image img, String title,String prix, boolean liked, int likeCount, int commentCount) {
+   private void addButton(Image img, String title,String prix, boolean liked, int likeCount, int commentCount,Resources res,String id,String titre,String description,String ld,String ref) {
        int height = Display.getInstance().convertToPixels(11.5f);
        int width = Display.getInstance().convertToPixels(14f);
        Button image = new Button(img.fill(width, height));
@@ -209,13 +205,13 @@ public class NewsfeedForm extends BaseForm {
        Container cnt = BorderLayout.west(image);
        cnt.setLeadComponent(image);
        TextArea ta = new TextArea(title);
-       TextArea ka = new TextArea(prix);
+       TextArea ka = new TextArea(prix+" TND");
        ta.setUIID("NewsTopLine");
        ta.setEditable(false);
        ka.setUIID("NewsBottomLine");
        ka.setEditable(false);
 
-       Label likes = new Label(likeCount + " Likes  ", "NewsBottomLine");
+       Label likes = new Label("#  "+ref.toString()+ "NewsBottomLine");
        likes.setTextPosition(RIGHT);
        if(!liked) {
            FontImage.setMaterialIcon(likes, FontImage.MATERIAL_FAVORITE);
@@ -225,17 +221,18 @@ public class NewsfeedForm extends BaseForm {
            FontImage heartImage = FontImage.createMaterial(FontImage.MATERIAL_FAVORITE, s);
            likes.setIcon(heartImage);
        }
-       Label comments = new Label(commentCount + " Comments", "NewsBottomLine");
-       FontImage.setMaterialIcon(likes, FontImage.MATERIAL_CHAT);
+       Label comments = new Label(commentCount + "");
+       FontImage.setMaterialIcon(likes, FontImage.MATERIAL_FAVORITE);
        
        
        cnt.add(BorderLayout.CENTER, 
                BoxLayout.encloseY(
-                       ta,ka,
-                       BoxLayout.encloseX(likes, comments)
+                       ta,ka
                ));
        add(cnt);
-       image.addActionListener(e -> ToastBar.showMessage(title, FontImage.MATERIAL_INFO));
+       
+       image.addActionListener(e-> new ProduitsUniqueForm(res,id,titre,prix,description,ld,ref).show());
+       
    }
     
     private void bindButtonSelection(Button b, Label arrow) {

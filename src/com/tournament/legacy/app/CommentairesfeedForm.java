@@ -43,18 +43,15 @@ import com.codename1.ui.layouts.GridLayout;
 import com.codename1.ui.layouts.LayeredLayout;
 import com.codename1.ui.plaf.Style;
 import com.codename1.ui.util.Resources;
-import com.tournament.legacy.entites.Produits;
-import com.tournament.legacy.services.ServiceProduits;
-import java.util.ArrayList;
 
 /**
  * The newsfeed form
  *
  * @author Aymen Laroussi
  */
-public class NewsfeedForm extends BaseForm {
+public class CommentairesfeedForm extends BaseForm {
 
-    public NewsfeedForm(Resources res) {
+    public CommentairesfeedForm(Resources res) {
         super("Newsfeed", BoxLayout.y());
         Toolbar tb = new Toolbar(true);
         setToolbar(tb);
@@ -142,19 +139,11 @@ public class NewsfeedForm extends BaseForm {
             updateArrowPosition(barGroup.getRadioButton(barGroup.getSelectedIndex()), arrow);
         });
         
-        
-        ArrayList<Produits> list = ServiceProduits.getInstance().ListeProduits();
-        for ( Produits c : list){
-           
-            
-        
-        
-        
-        
-        
-        addButton(res.getImage("news-item-1.jpg"), c.getTitre().toString(),c.getPromo().toString(), false, 26, 32);
-            add(new Button(""));
-    }}
+        addButton(res.getImage("news-item-1.jpg"), "Morbi per tincidunt tellus sit of amet eros laoreet.", false, 26, 32);
+        addButton(res.getImage("news-item-2.jpg"), "Fusce ornare cursus masspretium tortor integer placera.", true, 15, 21);
+        addButton(res.getImage("news-item-3.jpg"), "Maecenas eu risus blanscelerisque massa non amcorpe.", false, 36, 15);
+        addButton(res.getImage("news-item-4.jpg"), "Pellentesque non lorem diam. Proin at ex sollicia.", false, 11, 9);
+    }
     
     private void updateArrowPosition(Button b, Label arrow) {
         arrow.getUnselectedStyle().setMargin(LEFT, b.getX() + b.getWidth() / 2 - arrow.getWidth() / 2);
@@ -201,7 +190,7 @@ public class NewsfeedForm extends BaseForm {
         swipe.addTab("", page1);
     }
     
-   private void addButton(Image img, String title,String prix, boolean liked, int likeCount, int commentCount) {
+   private void addButton(Image img, String title, boolean liked, int likeCount, int commentCount) {
        int height = Display.getInstance().convertToPixels(11.5f);
        int width = Display.getInstance().convertToPixels(14f);
        Button image = new Button(img.fill(width, height));
@@ -209,11 +198,8 @@ public class NewsfeedForm extends BaseForm {
        Container cnt = BorderLayout.west(image);
        cnt.setLeadComponent(image);
        TextArea ta = new TextArea(title);
-       TextArea ka = new TextArea(prix);
        ta.setUIID("NewsTopLine");
        ta.setEditable(false);
-       ka.setUIID("NewsBottomLine");
-       ka.setEditable(false);
 
        Label likes = new Label(likeCount + " Likes  ", "NewsBottomLine");
        likes.setTextPosition(RIGHT);
@@ -231,7 +217,7 @@ public class NewsfeedForm extends BaseForm {
        
        cnt.add(BorderLayout.CENTER, 
                BoxLayout.encloseY(
-                       ta,ka,
+                       ta,
                        BoxLayout.encloseX(likes, comments)
                ));
        add(cnt);

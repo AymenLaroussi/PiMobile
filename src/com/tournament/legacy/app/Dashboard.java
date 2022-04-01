@@ -52,9 +52,9 @@ import java.util.ArrayList;
  *
  * @author Aymen Laroussi
  */
-public class NewsfeedForm extends BaseForm {
+public class Dashboard extends BaseForm1 {
 
-    public NewsfeedForm(Resources res) {
+    public Dashboard(Resources res) {
         super("Newsfeed", BoxLayout.y());
         Toolbar tb = new Toolbar(true);
         setToolbar(tb);
@@ -143,18 +143,7 @@ public class NewsfeedForm extends BaseForm {
         });
         
         
-        ArrayList<Produits> list = ServiceProduits.getInstance().ListeProduits();
-        for ( Produits c : list){
-           
-            
-        
-        
-        
-        
-        
-        addButton(res.getImage("news-item-1.jpg"), c.getTitre().toString(),c.getPromo().toString(), false, 26, 32);
-            add(new Button(""));
-    }}
+        }
     
     private void updateArrowPosition(Button b, Label arrow) {
         arrow.getUnselectedStyle().setMargin(LEFT, b.getX() + b.getWidth() / 2 - arrow.getWidth() / 2);
@@ -201,15 +190,15 @@ public class NewsfeedForm extends BaseForm {
         swipe.addTab("", page1);
     }
     
-   private void addButton(Image img, String title,String prix, boolean liked, int likeCount, int commentCount) {
+   private void addButton(Image img, boolean liked, int likeCount, int commentCount) {
        int height = Display.getInstance().convertToPixels(11.5f);
        int width = Display.getInstance().convertToPixels(14f);
        Button image = new Button(img.fill(width, height));
        image.setUIID("Label");
        Container cnt = BorderLayout.west(image);
        cnt.setLeadComponent(image);
-       TextArea ta = new TextArea(title);
-       TextArea ka = new TextArea(prix);
+       TextArea ta = new TextArea("");
+       TextArea ka = new TextArea("");
        ta.setUIID("NewsTopLine");
        ta.setEditable(false);
        ka.setUIID("NewsBottomLine");
@@ -235,7 +224,7 @@ public class NewsfeedForm extends BaseForm {
                        BoxLayout.encloseX(likes, comments)
                ));
        add(cnt);
-       image.addActionListener(e -> ToastBar.showMessage(title, FontImage.MATERIAL_INFO));
+       image.addActionListener(e -> ToastBar.showMessage("", FontImage.MATERIAL_INFO));
    }
     
     private void bindButtonSelection(Button b, Label arrow) {

@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.tournament.legacy.utils;
+package com.tournament.legacy.app.produits;
 
 /**
  *
  * @author Aymen Laroussi
  */
-public class Statics {
-    public static final String BASE_URL="http://127.0.0.1:8000";
+public class ProduitsForm {
+    
 }
