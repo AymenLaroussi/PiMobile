@@ -145,7 +145,15 @@ public class NewsfeedForm extends BaseForm {
         
         ArrayList<Produits> list = ServiceProduits.getInstance().ListeProduits();
         for ( Produits c : list){
+
+           
             
+        
+        
+        
+        
+        
+
         addButton(res.getImage("news-item-1.jpg"), c.getTitre().toString(),c.getPromo().toString(), false, 26, 32);
             add(new Button(""));
     }}

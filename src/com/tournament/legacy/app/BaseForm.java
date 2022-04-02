@@ -33,13 +33,15 @@ import com.codename1.ui.layouts.LayeredLayout;
 import com.codename1.ui.layouts.Layout;
 import com.codename1.ui.plaf.Style;
 import com.codename1.ui.util.Resources;
+import com.tournament.legacy.entites.User;
 
 /**
  * Base class for the forms with common functionality
  *
- * @author Shai Almog
+ * @author Aymen Laroussi
  */
 public class BaseForm extends Form {
+    public static User currentUser;
 
     public BaseForm() {
     }
@@ -86,6 +88,9 @@ public class BaseForm extends Form {
         tb.addMaterialCommandToSideMenu("Newsfeed", FontImage.MATERIAL_UPDATE, e -> new NewsfeedForm(res).show());
         tb.addMaterialCommandToSideMenu("Tournois", FontImage.MATERIAL_UPDATE, e -> new TournoiForm(res).show());
         tb.addMaterialCommandToSideMenu("Profile", FontImage.MATERIAL_SETTINGS, e -> new ProfileForm(res).show());
+        tb.addMaterialCommandToSideMenu("BOUTIQUE", FontImage.MATERIAL_EXIT_TO_APP, e -> new ProduitsfeedForm1(res).show());
+        tb.addMaterialCommandToSideMenu("BACKOFFICE", FontImage.MATERIAL_SETTINGS, e -> new Dashboard(res).show());
         tb.addMaterialCommandToSideMenu("Logout", FontImage.MATERIAL_EXIT_TO_APP, e -> new WalkthruForm(res).show());
+       
     }
 }

@@ -42,7 +42,9 @@ public class MyApplication {
     }
     
     public void start() {
+
         new WalkthruForm(theme).show();
+
     }
 
     public void stop() {
