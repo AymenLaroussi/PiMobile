@@ -9,10 +9,12 @@ import com.codename1.io.CharArrayReader;
 import com.tournament.legacy.utils.Statics;
 import com.codename1.io.ConnectionRequest;
 import com.codename1.io.JSONParser;
+import com.codename1.io.MultipartRequest;
 import com.codename1.io.NetworkEvent;
 import com.codename1.io.NetworkManager;
 import com.codename1.ui.events.ActionListener;
 import com.tournament.legacy.entites.Produits;
+import static com.tournament.legacy.utils.Statics.BASE_URL;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -121,6 +123,7 @@ public class ServiceProduits {
                 p.setRef((obj.get("ref").toString()));
                 p.setLongdescription((obj.get("longdescription").toString()));
                 p.setPrix((obj.get("prix").toString()));
+                p.setPromo((obj.get("promo").toString()));
                 
                 
                 produit.add(p);
@@ -132,7 +135,7 @@ public class ServiceProduits {
     }
     
     public void supprimerProduits(String p){
-        String url = Statics.BASE_URL + "/web/service/supprimer?id="+ p;
+        String url = Statics.BASE_URL + "/web/service/produit/supprimer?id="+ p;
         req.setUrl(url);
         req.addResponseListener(new ActionListener<NetworkEvent>() {
             @Override

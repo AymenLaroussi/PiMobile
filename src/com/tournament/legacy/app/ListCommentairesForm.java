@@ -10,6 +10,7 @@ import com.codename1.components.MultiButton;
 import com.codename1.components.SpanLabel;
 import com.codename1.ui.Button;
 import com.codename1.ui.Container;
+import com.codename1.ui.Dialog;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.Label;
@@ -20,12 +21,14 @@ import com.codename1.ui.util.Resources;
 import com.tournament.legacy.entites.Commentaires;
 import com.tournament.legacy.services.ServiceCategorie;
 import com.tournament.legacy.services.ServiceCommentaire;
+import com.tournament.legacy.services.ServiceProduits;
 import java.util.ArrayList;
 
 import java.util.ArrayList;
 
 public class ListCommentairesForm extends Form {
-
+final Button show = new Button("Show Dialog");
+String ch;
     public ListCommentairesForm(Resources res) {
 
         Button btnSuppriemr = new Button("X");
@@ -50,12 +53,22 @@ public class ListCommentairesForm extends Form {
             sp.setTextLine2("Produit : "+coment.getProduit());
             sp.setTextLine3("Date : "+coment.getDate());
             sp.setTextLine4("message : "+coment.getMessage());
-            
+            ch = coment.getId();
             list1.add(LabelComent);
             list1.add(sp);
             
             
-            
+            show.addActionListener(e -> {if (Dialog.show("Confirmer", "", "SUPPRIMER", "ANNULER")) {
+                       try{
+        ServiceCommentaire.getInstance().supprimerCommentaire(ch);}
+        catch (NullPointerException npe){
+            new CategorieForm(res).show();
+                }
+                       
+    }
+             
+
+});
 
         }
         
@@ -69,5 +82,4 @@ public class ListCommentairesForm extends Form {
         this.add(list1);
 
 
-    }
-}
+    }}

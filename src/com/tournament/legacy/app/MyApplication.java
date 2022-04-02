@@ -42,7 +42,7 @@ public class MyApplication {
     }
     
     public void start() {
-        new ListCommentairesForm(theme).show();
+        new Dashboard(theme).show();
     }
 
     public void stop() {

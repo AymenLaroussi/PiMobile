@@ -6,6 +6,7 @@
 package com.tournament.legacy.app;
 
 import com.codename1.ui.Button;
+import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.Label;
 import com.codename1.ui.layouts.BoxLayout;
@@ -29,4 +30,11 @@ public class CategorieForm extends Form {
         btnListe.addActionListener(e-> new ListCategoriesForm(res).show());
         addAll(btnAjout, btnListe);
         
-}}
+    getToolbar().addMaterialCommandToLeftBar("",FontImage.MATERIAL_ARROW_BACK, (evt) -> {
+
+            new com.tournament.legacy.app.Dashboard(res).show();
+
+        });    
+        
+}
+}

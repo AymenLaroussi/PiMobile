@@ -64,8 +64,8 @@ public class ProfileForm extends BaseForm {
         sl.setUIID("BottomPad");
         sl.setBackgroundType(Style.BACKGROUND_IMAGE_SCALED_FILL);
 
-        Label facebook = new Label("786 followers", res.getImage("facebook-logo.png"), "BottomPad");
-        Label twitter = new Label("486 followers", res.getImage("twitter-logo.png"), "BottomPad");
+        Label facebook = new Label("", res.getImage("facebook-logo.png"), "");
+        Label twitter = new Label(" ", res.getImage("twitter-logo.png"), "");
         facebook.setTextPosition(BOTTOM);
         twitter.setTextPosition(BOTTOM);
         
@@ -85,7 +85,7 @@ public class ProfileForm extends BaseForm {
         username.setUIID("TextFieldBlack");
         addStringValue("Username", username);
 
-        TextField email = new TextField("sandeep@gmail.com", "E-Mail", 20, TextField.EMAILADDR);
+        TextField email = new TextField("sandeep@.com", "E-Mail", 20, TextField.EMAILADDR);
         email.setUIID("TextFieldBlack");
         addStringValue("E-Mail", email);
         
@@ -109,4 +109,5 @@ public class ProfileForm extends BaseForm {
                 add(BorderLayout.CENTER, v));
         add(createLineSeparator(0xeeeeee));
     }
+    
 }
