@@ -71,10 +71,6 @@ Label label;
 });
 
         }
-        
-EncodedImage encImage = (EncodedImage)label.getIcon();
-                       label.setIcon(URLImage.createToStorage(encImage, "Medium_" + "http://127.0.0.1:8000/uploads/fc243e66-df0c-400b-bcd6-0aad4038d52b-62327040df546.jpeg", "http://127.0.0.1:8000/uploads/fc243e66-df0c-400b-bcd6-0aad4038d52b-62327040df546.jpeg", URLImage.RESIZE_SCALE));
-                 add(label);
         getToolbar().addMaterialCommandToLeftBar("",FontImage.MATERIAL_ARROW_BACK, (evt) -> {
 
             new com.tournament.legacy.app.CategorieForm(res).show();

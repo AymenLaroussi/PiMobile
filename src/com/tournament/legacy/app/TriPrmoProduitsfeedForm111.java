@@ -54,9 +54,9 @@ import java.util.ArrayList;
  *
  * @author Aymen Laroussi
  */
-public class ProduitsfeedForm1 extends BaseForm {
+public class TriPrmoProduitsfeedForm111 extends BaseForm {
   Button btnSuppriemr = new Button("X");
-    public ProduitsfeedForm1(Resources res) {
+    public TriPrmoProduitsfeedForm111(Resources res) {
         super("Newsfeed", BoxLayout.y());
         Toolbar tb = new Toolbar(true);
         setToolbar(tb);
@@ -112,13 +112,13 @@ public class ProduitsfeedForm1 extends BaseForm {
         add(LayeredLayout.encloseIn(swipe, radioContainer));
         
         ButtonGroup barGroup = new ButtonGroup();
-        RadioButton all = RadioButton.createToggle("All", barGroup);
+        RadioButton all = RadioButton.createToggle("TOUS", barGroup);
         all.setUIID("SelectBar");
-        RadioButton featured = RadioButton.createToggle("Featured", barGroup);
+        RadioButton featured = RadioButton.createToggle("TRI CROISSANT", barGroup);
         featured.setUIID("SelectBar");
-        RadioButton popular = RadioButton.createToggle("Popular", barGroup);
+        RadioButton popular = RadioButton.createToggle("TRI DECROISSANT", barGroup);
         popular.setUIID("SelectBar");
-        RadioButton myFavorite = RadioButton.createToggle("My Favorites", barGroup);
+        RadioButton myFavorite = RadioButton.createToggle("par promo", barGroup);
         myFavorite.setUIID("SelectBar");
         Label arrow = new Label(res.getImage("news-tab-down-arrow.png"), "Container");
         
@@ -126,6 +126,19 @@ public class ProduitsfeedForm1 extends BaseForm {
                 GridLayout.encloseIn(4, all, featured, popular, myFavorite),
                 FlowLayout.encloseBottom(arrow)
         ));
+         all.addActionListener(actionEvent -> {
+            new ProduitsfeedForm1(res).show();
+        });
+        all.addActionListener(actionEvent -> {
+            new TriSECCProduitsfeedForm11(res).show();
+        });
+        featured.addActionListener(actionEvent -> {
+            new TriDESCProduitsfeedForm1(res).show();
+        });
+        myFavorite.addActionListener(actionEvent -> {
+            new TriPrmoProduitsfeedForm111(res).show();
+        });
+ 
         
         all.setSelected(true);
         arrow.setVisible(false);
@@ -147,7 +160,7 @@ public class ProduitsfeedForm1 extends BaseForm {
         });
         
         
-        ArrayList<Produits> list = ServiceProduits.getInstance().ListeProduits();
+        ArrayList<Produits> list = ServiceProduits.getInstance().FLASH();
         for ( Produits c : list){
          
             String id = c.getId().toString();

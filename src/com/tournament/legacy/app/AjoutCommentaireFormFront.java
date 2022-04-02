@@ -23,9 +23,9 @@ import com.tournament.legacy.services.ServiceCommentaire;
  *
  * @author Aymen Laroussi
  */
-public class AjoutCommentaireForm extends Form {
+public class AjoutCommentaireFormFront extends Form {
 
-   public AjoutCommentaireForm(Resources res,Form previous) {
+   public AjoutCommentaireFormFront(Resources res,Form previous) {
     
        setTitle("Ajout d'un commentaire");
         getToolbar().addMaterialCommandToLeftBar("",FontImage.MATERIAL_ARROW_BACK, e->previous.showBack());

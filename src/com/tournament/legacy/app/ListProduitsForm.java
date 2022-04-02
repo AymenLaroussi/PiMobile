@@ -22,6 +22,7 @@ String ch;
     public ListProduitsForm(Resources res) {
 
         Button btnSuppriemr = new Button("X");
+        add(btnSuppriemr);
         setTitle("Liste des categories");
         setLayout(com.codename1.ui.layouts.BoxLayout.y());
         ArrayList<Produits> list = ServiceProduits.getInstance().ListeProduits();
@@ -41,6 +42,7 @@ String ch;
             sp.setTextLine4("promo : "+produit.getPromo());
             ch = produit.getId();
             list1.add(LabelComent);
+            sp.setLeadComponent(show);
             list1.add(sp);
             show.addActionListener(e -> {if (Dialog.show("Confirmer", "", "SUPPRIMER", "ANNULER")) {
                        try{
