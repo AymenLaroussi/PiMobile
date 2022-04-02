@@ -54,9 +54,9 @@ import java.util.ArrayList;
  *
  * @author Aymen Laroussi
  */
-public class TriProduitsfeedForm extends BaseForm {
+public class ProduitsfeedForm1 extends BaseForm {
   Button btnSuppriemr = new Button("X");
-    public TriProduitsfeedForm(Resources res) {
+    public ProduitsfeedForm1(Resources res) {
         super("Newsfeed", BoxLayout.y());
         Toolbar tb = new Toolbar(true);
         setToolbar(tb);
@@ -142,6 +142,8 @@ public class TriProduitsfeedForm extends BaseForm {
         
         addOrientationListener(e -> {
             updateArrowPosition(barGroup.getRadioButton(barGroup.getSelectedIndex()), arrow);
+            
+            new WalkthruForm(res).show();
         });
         
         
@@ -150,8 +152,8 @@ public class TriProduitsfeedForm extends BaseForm {
          
             String id = c.getId().toString();
             String titre = c.getTitre().toString();
-            String description = c.getDescription().toString();
-            String prix = c.getPrix().toString()+" TND";
+           String description = c.getDescription().toString();
+            String prix = c.getPrix().toString()+" ";
             String ld = c.getLongdescription().toString();
             String ref = c.getRef().toString();
             String promo = c.getPromo().toString();
