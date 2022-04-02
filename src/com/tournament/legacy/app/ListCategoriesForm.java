@@ -10,9 +10,12 @@ import com.codename1.components.MultiButton;
 import com.codename1.components.SpanLabel;
 import com.codename1.ui.Button;
 import com.codename1.ui.Container;
+import com.codename1.ui.Dialog;
+import com.codename1.ui.EncodedImage;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.Label;
+import com.codename1.ui.URLImage;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.table.TableLayout;
 import com.codename1.ui.util.Resources;
@@ -24,16 +27,20 @@ import java.util.ArrayList;
 import java.util.ArrayList;
 
 public class ListCategoriesForm extends Form {
+String ch;
+Label label;
 
     public ListCategoriesForm(Resources res) {
-
+        final Button show = new Button("Show Dialog");
         Button btnSuppriemr = new Button("X");
         setTitle("Liste des categories");
         setLayout(BoxLayout.y());
         ArrayList<Categories> list = ServiceCategorie.getInstance().getAllCategories();
         Container list1 = new Container(BoxLayout.y());
-        list1.setScrollableY(true);
+        list1.setScrollableY(false);
         list1.setScrollableX(true);
+        
+   
         for ( Categories cat : list) {
 
 
@@ -42,16 +49,32 @@ public class ListCategoriesForm extends Form {
             sp.getAllStyles().setFgColor(0x350a4e);
             Label l = new Label(" ");
 
+      
             
-
             sp.setText("Id : "+cat.getId());
             sp.setTextLine2("Nom : "+cat.getNom());
+            sp.setLeadComponent(show);
+                  ch= cat.getId();
             list1.add(LabelUser);
             list1.add(sp);
             
+            show.addActionListener(e -> {if (Dialog.show("Confirmer", "", "SUPPRIMER", "ANNULER")) {
+                       try{
+        ServiceCategorie.getInstance().supprimerCategories(ch);}
+        catch (NullPointerException npe){
+            new CategorieForm(res).show();
+        }
+                       
+    }
+             
+
+});
 
         }
-
+        
+EncodedImage encImage = (EncodedImage)label.getIcon();
+                       label.setIcon(URLImage.createToStorage(encImage, "Medium_" + "http://127.0.0.1:8000/uploads/fc243e66-df0c-400b-bcd6-0aad4038d52b-62327040df546.jpeg", "http://127.0.0.1:8000/uploads/fc243e66-df0c-400b-bcd6-0aad4038d52b-62327040df546.jpeg", URLImage.RESIZE_SCALE));
+                 add(label);
         getToolbar().addMaterialCommandToLeftBar("",FontImage.MATERIAL_ARROW_BACK, (evt) -> {
 
             new com.tournament.legacy.app.CategorieForm(res).show();

@@ -57,7 +57,7 @@ import java.util.ArrayList;
  */
 public class ProduitsUniqueForm extends BaseForm {
 
-    public ProduitsUniqueForm(Resources res,String id,String titre,String prix ,String  description,String ld,String ref ) {
+    public ProduitsUniqueForm(Resources res,String id,String titre,String prix ,String  description,String ld,String ref ,String promo ) {
         super("Produit "+titre, BoxLayout.y());
         Toolbar tb = new Toolbar(true);
         setToolbar(tb);
@@ -73,7 +73,7 @@ public class ProduitsUniqueForm extends BaseForm {
         Label spacer1 = new Label();
         Label spacer2 = new Label();
         
-        addTab(swipe, res.getImage("news-item.jpg"), spacer1, "15 Likes  ", "85 Comments", "Integer ut placerat purued non dignissim neque. ");       
+        addTab(swipe, res.getImage("news-item.jpg"), spacer1, "  ", "", "");       
         swipe.setUIID("Container");
         swipe.getContentPane().setUIID("Container");
         swipe.hideTabs();
@@ -151,7 +151,7 @@ public class ProduitsUniqueForm extends BaseForm {
             Button btnSuppriemr = new Button("AJOUTER AU PANIER");
         
             
-        addButton(res.getImage("news-item-1.jpg"), titre,prix, false, res, id,ref,description);
+        addButton(res.getImage("news-item-1.jpg"), titre,prix, false, res, id,ref,description,ld,promo);
         add(btnSuppriemr);
         
       
@@ -181,8 +181,9 @@ public class ProduitsUniqueForm extends BaseForm {
             list.add(sp);
          
         }
+        
         Button btnListe = new Button("Liste des commentaires");
-        btnListe.addActionListener(e-> new ProduitsfeedForm1(res).show());
+        btnListe.addActionListener(e-> new ListCommentairesFormFront(res,id).show());
         addAll(btnListe);
         System.out.println(id);
        }
@@ -266,7 +267,7 @@ public class ProduitsUniqueForm extends BaseForm {
     
     
     
-   private void addButton(Image img, String titre, String prix, boolean liked,  Resources res, String id,String ref, String description ) {
+   private void addButton(Image img, String titre, String prix, boolean liked,  Resources res, String id,String ref, String description,String ld,String promo ) {
        int height = Display.getInstance().convertToPixels(30.5f);
        int width = Display.getInstance().convertToPixels(30f);
        Button image = new Button(img.fill(width, height));
@@ -274,9 +275,14 @@ public class ProduitsUniqueForm extends BaseForm {
        Container cnt = BorderLayout.west(image);
        cnt.setLeadComponent(image);
        TextArea titre1 = new TextArea("titre du produit : "+titre);
-       TextArea prix1 = new TextArea(prix);
-       TextArea ref1 = new TextArea(ref);
-       TextArea des1 = new TextArea(description);
+       TextArea prix1 = new TextArea("Prix du produit : "+prix);
+       TextArea ref1 = new TextArea("reference : #"+ref);
+       TextArea des1 = new TextArea("description : "+description);
+       TextArea des2 = new TextArea("détail : "+ld);
+       TextArea promo1 = new TextArea("au lieu de  "+promo + " TND");
+       
+       promo1.setUIID("NewsTopLine");
+       promo1.setEditable(false);
        titre1.setUIID("NewsTopLine");
        titre1.setEditable(false);
        prix1.setUIID("NewsBottomLine");
@@ -296,7 +302,7 @@ public class ProduitsUniqueForm extends BaseForm {
        
        cnt.add(BorderLayout.CENTER, 
                BoxLayout.encloseY(
-                       titre1,prix1,ref1,des1
+                       titre1,ref1,des1,des2,prix1,promo1
                ));
        add(cnt);
        image.addActionListener(e -> ToastBar.showMessage(titre, FontImage.MATERIAL_INFO));

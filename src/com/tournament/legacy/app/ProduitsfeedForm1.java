@@ -152,13 +152,14 @@ public class ProduitsfeedForm1 extends BaseForm {
          
             String id = c.getId().toString();
             String titre = c.getTitre().toString();
-            String description = c.getDescription().toString();
-            String prix = c.getPrix().toString()+" TND";
+           String description = c.getDescription().toString();
+            String prix = c.getPrix().toString()+" ";
             String ld = c.getLongdescription().toString();
             String ref = c.getRef().toString();
+            String promo = c.getPromo().toString();
             
             
-        addButton(res.getImage("news-item-1.jpg"), titre,prix, false, 26, 32,res,id,titre,description,ld,ref);
+        addButton(res.getImage("news-item-1.jpg"), titre,prix, false, 26, 32,res,id,titre,description,ld,ref,promo);
         
         
     }}
@@ -199,7 +200,7 @@ public class ProduitsfeedForm1 extends BaseForm {
         swipe.addTab("", page1);
     }
     
-   private void addButton(Image img, String title,String prix, boolean liked, int likeCount, int commentCount,Resources res,String id,String titre,String description,String ld,String ref) {
+   private void addButton(Image img, String title,String prix, boolean liked, int likeCount, int commentCount,Resources res,String id,String titre,String description,String ld,String ref,String promo) {
        int height = Display.getInstance().convertToPixels(11.5f);
        int width = Display.getInstance().convertToPixels(14f);
        Button image = new Button(img.fill(width, height));
@@ -233,7 +234,7 @@ public class ProduitsfeedForm1 extends BaseForm {
                ));
        add(cnt);
        
-       image.addActionListener(e-> new ProduitsUniqueForm(res,id,titre,prix,description,ld,ref).show());
+       image.addActionListener(e-> new ProduitsUniqueForm(res,id,titre,prix,description,ld,ref,promo).show());
        
    }
     

@@ -142,7 +142,7 @@ public class ServiceCommentaire {
     }
     
     public void supprimerCommentaire(String p){
-        String url = Statics.BASE_URL + "/web/service/supprimer?id="+ p;
+        String url = Statics.BASE_URL + "/web/service/commentaire/supprimer?id="+ p;
         req.setUrl(url);
         req.addResponseListener(new ActionListener<NetworkEvent>() {
             @Override
