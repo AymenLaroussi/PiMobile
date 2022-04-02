@@ -54,9 +54,9 @@ import java.util.ArrayList;
  *
  * @author Aymen Laroussi
  */
-public class ProduitsfeedForm1 extends BaseForm {
+public class TriPrmoProduitsfeedForm111 extends BaseForm {
   Button btnSuppriemr = new Button("X");
-    public ProduitsfeedForm1(Resources res) {
+    public TriPrmoProduitsfeedForm111(Resources res) {
         super("Newsfeed", BoxLayout.y());
         Toolbar tb = new Toolbar(true);
         setToolbar(tb);
@@ -138,6 +138,7 @@ public class ProduitsfeedForm1 extends BaseForm {
         myFavorite.addActionListener(actionEvent -> {
             new TriPrmoProduitsfeedForm111(res).show();
         });
+ 
         
         all.setSelected(true);
         arrow.setVisible(false);
@@ -159,7 +160,7 @@ public class ProduitsfeedForm1 extends BaseForm {
         });
         
         
-        ArrayList<Produits> list = ServiceProduits.getInstance().ListeProduits();
+        ArrayList<Produits> list = ServiceProduits.getInstance().FLASH();
         for ( Produits c : list){
          
             String id = c.getId().toString();

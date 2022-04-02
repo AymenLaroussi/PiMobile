@@ -55,6 +55,7 @@ String ch;
             sp.setTextLine4("message : "+coment.getMessage());
             ch = coment.getId();
             list1.add(LabelComent);
+            sp.setLeadComponent(show);
             list1.add(sp);
             
             
