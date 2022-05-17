@@ -70,7 +70,7 @@ Form current;
 add(btnAjout);
         getToolbar().addMaterialCommandToLeftBar("",FontImage.MATERIAL_ARROW_BACK, (evt) -> {
 
-            new com.tournament.legacy.app.ProduitsfeedForm1(res).show();
+            new com.tournament.legacy.app.CommentairesForm(res).show();
 
         });
 

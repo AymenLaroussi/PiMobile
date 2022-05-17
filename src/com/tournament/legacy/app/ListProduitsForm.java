@@ -17,12 +17,12 @@ import com.tournament.legacy.services.ServiceProduits;
 import java.util.ArrayList;
 
 public class ListProduitsForm extends Form {
-final Button show = new Button("Show Dialog");
+
 String ch;
     public ListProduitsForm(Resources res) {
 
         Button btnSuppriemr = new Button("X");
-        add(btnSuppriemr);
+        
         setTitle("Liste des categories");
         setLayout(com.codename1.ui.layouts.BoxLayout.y());
         ArrayList<Produits> list = ServiceProduits.getInstance().ListeProduits();
@@ -30,6 +30,7 @@ String ch;
         list1.setScrollableY(true);
         list1.setScrollableX(true);
          for ( Produits produit : list){
+           Button show = new Button("Show Dialog");
            SpanLabel LabelComent = new SpanLabel();
             MultiButton sp = new MultiButton();
             sp.getAllStyles().setFgColor(0x350afe);
@@ -42,11 +43,16 @@ String ch;
             sp.setTextLine4("promo : "+produit.getPromo());
             ch = produit.getId();
             list1.add(LabelComent);
+            show.setText(ch);
             sp.setLeadComponent(show);
             list1.add(sp);
-            show.addActionListener(e -> {if (Dialog.show("Confirmer", "", "SUPPRIMER", "ANNULER")) {
+            
+         
+         
+                     show.addActionListener(e -> {if (Dialog.show("Confirmer", "", "SUPPRIMER", "ANNULER")) {
+                System.out.println("test");
                        try{
-        ServiceProduits.getInstance().supprimerProduits(ch);}
+        ServiceProduits.getInstance().supprimerProduits(show.getText());}
         catch (NullPointerException npe){
             new CategorieForm(res).show();
                 }
@@ -55,8 +61,11 @@ String ch;
              
 
 });
+         
+         }
 
-        }
+
+
         
 
         getToolbar().addMaterialCommandToLeftBar("",FontImage.MATERIAL_ARROW_BACK, (evt) -> {

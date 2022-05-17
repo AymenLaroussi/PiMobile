@@ -46,7 +46,7 @@ public class ServiceCommentaire {
     }
     
     public boolean AjoutCommentaire (Commentaires c){
-        String url = Statics.BASE_URL + "/web/service/commentaires/ajout?id="+c.getId()+"&message="+c.getMessage();
+        String url = Statics.BASE_URL + "/web/service/commentaires/ajout?id=1&message="+c.getMessage()+"user=1";
         req.setUrl(url);
         req.addResponseListener(new ActionListener<NetworkEvent>() {
             @Override

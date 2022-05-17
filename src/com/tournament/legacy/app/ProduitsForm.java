@@ -6,6 +6,7 @@
 package com.tournament.legacy.app;
 
 import com.codename1.ui.Button;
+import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.Label;
 import com.codename1.ui.layouts.BoxLayout;
@@ -24,14 +25,21 @@ public class ProduitsForm extends Form {
         setTitle("Produits");
         setLayout(BoxLayout.y());
         add(new Label("Choose an option"));
-        Button btnAjout = new Button("Ajout d'un Commentaire");
-        Button btnListe = new Button("Liste des commentaires");
-        Button btnSuppriemr = new Button("Supprimer un commentaire");
+        Button btnAjout = new Button("Ajout d'un produit");
+        Button btnListe = new Button("Liste des produits");
+        Button btnSuppriemr = new Button("Supprimer un produit");
         btnAjout.addActionListener(e-> new AjoutProduitForm(res,current).show());
         btnListe.addActionListener(e-> new ListProduitsForm(res).show());
         addAll(btnAjout, btnListe,btnSuppriemr);
         
+         getToolbar().addMaterialCommandToLeftBar("",FontImage.MATERIAL_ARROW_BACK, (evt) -> {
+
+            new com.tournament.legacy.app.Dashboard(res).show();
+
+        });
+        
 }
+  
 
    
 

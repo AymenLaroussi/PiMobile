@@ -31,7 +31,7 @@ String ch;
 Label label;
 
     public ListCategoriesForm(Resources res) {
-        final Button show = new Button("Show Dialog");
+        
         Button btnSuppriemr = new Button("X");
         setTitle("Liste des categories");
         setLayout(BoxLayout.y());
@@ -43,7 +43,7 @@ Label label;
    
         for ( Categories cat : list) {
 
-
+            Button show = new Button("Show Dialog");
             SpanLabel LabelUser = new SpanLabel();
             MultiButton sp = new MultiButton();
             sp.getAllStyles().setFgColor(0x350a4e);
@@ -57,7 +57,6 @@ Label label;
                   ch= cat.getId();
             list1.add(LabelUser);
             list1.add(sp);
-            
             show.addActionListener(e -> {if (Dialog.show("Confirmer", "", "SUPPRIMER", "ANNULER")) {
                        try{
         ServiceCategorie.getInstance().supprimerCategories(ch);}
@@ -69,6 +68,7 @@ Label label;
              
 
 });
+            
 
         }
         getToolbar().addMaterialCommandToLeftBar("",FontImage.MATERIAL_ARROW_BACK, (evt) -> {
