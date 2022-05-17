@@ -40,19 +40,19 @@ public class AjoutProduitForm extends Form {
         });
      
 
-       TextField titre = new TextField("","entrer la titre !!");
+       TextField titre = new TextField("","entrer la titre ");
         titre.setUIID("TextFieldBlack");
        addStringValue("Titre",titre);
        
-       TextField description = new TextField("","saisir la description de votre produit !!");
+       TextField description = new TextField("","saisir la description");
        description.setUIID("TextFieldBlack");
        addStringValue("Description",description);
 
-       TextField promo = new TextField("","entrer promotion  de la voiturec!!");
+       TextField promo = new TextField("","entrer promotion ");
         promo.setUIID("TextFieldBlack");
        addStringValue("promotion du produit",promo);
        
-       TextField stock = new TextField("","Stock du produit !!");
+       TextField stock = new TextField("","Nbr de stock");
         stock.setUIID("TextFieldBlack");
        addStringValue("Stock",stock);
 
@@ -61,15 +61,15 @@ public class AjoutProduitForm extends Form {
         ref.setUIID("TextFieldBlack");
        addStringValue("ref",ref);
 
-        TextField longdescription = new TextField("","Description !!");
+        TextField longdescription = new TextField("","Long Description !!");
         longdescription.setUIID("TextFieldBlack");
         addStringValue("description",longdescription);
 
-       TextField prix = new TextField("","enter your type!!");
+       TextField prix = new TextField("","Prix du produit!!");
         prix.setUIID("TextFieldBlack");
         addStringValue("Prix en DN/Jour",prix);
         
-        TextField categories = new TextField("","categories!!");
+        TextField categories = new TextField("","categories ID");
         categories.setUIID("TextFieldBlack");
         addStringValue("categorie",categories);
        
@@ -117,6 +117,8 @@ public class AjoutProduitForm extends Form {
                 .add(BorderLayout.CENTER,v));
 
     }
+    
+    
 
     
 }

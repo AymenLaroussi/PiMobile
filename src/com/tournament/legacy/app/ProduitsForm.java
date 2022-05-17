@@ -24,9 +24,9 @@ public class ProduitsForm extends Form {
         setTitle("Produits");
         setLayout(BoxLayout.y());
         add(new Label("Choose an option"));
-        Button btnAjout = new Button("Ajout d'un Commentaire");
-        Button btnListe = new Button("Liste des commentaires");
-        Button btnSuppriemr = new Button("Supprimer un commentaire");
+        Button btnAjout = new Button("Ajout d'un produit");
+        Button btnListe = new Button("Liste des produits");
+        Button btnSuppriemr = new Button("Supprimer un produit");
         btnAjout.addActionListener(e-> new AjoutProduitForm(res,current).show());
         btnListe.addActionListener(e-> new ListProduitsForm(res).show());
         addAll(btnAjout, btnListe,btnSuppriemr);

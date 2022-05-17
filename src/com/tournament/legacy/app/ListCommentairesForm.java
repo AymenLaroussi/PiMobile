@@ -54,13 +54,15 @@ String ch;
             sp.setTextLine3("Date : "+coment.getDate());
             sp.setTextLine4("message : "+coment.getMessage());
             ch = coment.getId();
+            show.setText(ch);
             list1.add(LabelComent);
+            sp.setLeadComponent(show);
             list1.add(sp);
             
-            
+             }
             show.addActionListener(e -> {if (Dialog.show("Confirmer", "", "SUPPRIMER", "ANNULER")) {
                        try{
-        ServiceCommentaire.getInstance().supprimerCommentaire(ch);}
+        ServiceCommentaire.getInstance().supprimerCommentaire(show.getText());}
         catch (NullPointerException npe){
             new CategorieForm(res).show();
                 }
@@ -70,7 +72,7 @@ String ch;
 
 });
 
-        }
+       
         
 
         getToolbar().addMaterialCommandToLeftBar("",FontImage.MATERIAL_ARROW_BACK, (evt) -> {

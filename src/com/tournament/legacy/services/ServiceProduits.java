@@ -148,6 +148,67 @@ public class ServiceProduits {
     
     
     
+    
+    
+      public ArrayList<Produits> ASEC() {
+              String url = Statics.BASE_URL + "/web/service/produit/ASEC";
+              req.setUrl(url);
+              req.addResponseListener(new ActionListener<NetworkEvent>() {
+                  @Override
+                  public void actionPerformed(NetworkEvent evt) {
+                      try {
+                          produit = parseProduits(new String(req.getResponseData()));
+                          req.removeResponseListener(this);
+                          
+                      } catch (IOException ex) {
+
+                      }
+                  }
+              });
+              NetworkManager.getInstance().addToQueueAndWait(req);
+              return produit;
+          } 
+      
+       public ArrayList<Produits> DESC() {
+              String url = Statics.BASE_URL + "/web/service/produit/DESC";
+              req.setUrl(url);
+              req.addResponseListener(new ActionListener<NetworkEvent>() {
+                  @Override
+                  public void actionPerformed(NetworkEvent evt) {
+                      try {
+                          produit = parseProduits(new String(req.getResponseData()));
+                          req.removeResponseListener(this);
+                          
+                      } catch (IOException ex) {
+
+                      }
+                  }
+              });
+              NetworkManager.getInstance().addToQueueAndWait(req);
+              return produit;
+          } 
+       
+        public ArrayList<Produits> FLASH() {
+              String url = Statics.BASE_URL + "/web/service/produit/FLASH";
+              req.setUrl(url);
+              req.addResponseListener(new ActionListener<NetworkEvent>() {
+                  @Override
+                  public void actionPerformed(NetworkEvent evt) {
+                      try {
+                          produit = parseProduits(new String(req.getResponseData()));
+                          req.removeResponseListener(this);
+                          
+                      } catch (IOException ex) {
+
+                      }
+                  }
+              });
+              NetworkManager.getInstance().addToQueueAndWait(req);
+              return produit;
+          } 
+    
+    
+    
         
 }
 

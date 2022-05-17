@@ -29,6 +29,8 @@ import java.util.ArrayList;
 public class ListCommentairesFormFront extends Form {
 final Button show = new Button("Show Dialog");
 String ch;
+Form current;
+    Resources res;
     public ListCommentairesFormFront(Resources res,String id) {
 
         Button btnSuppriemr = new Button("X");
@@ -62,11 +64,13 @@ String ch;
    
 
         }
+        Button btnAjout = new Button("Ajout d'un Commentaire");
         
-
+        btnAjout.addActionListener(e-> new AjoutCommentaireForm(res,current).show());
+add(btnAjout);
         getToolbar().addMaterialCommandToLeftBar("",FontImage.MATERIAL_ARROW_BACK, (evt) -> {
 
-            new com.tournament.legacy.app.ProduitsfeedForm1(res).show();
+            new com.tournament.legacy.app.CommentairesForm(res).show();
 
         });
 

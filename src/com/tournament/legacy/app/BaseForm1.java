@@ -85,10 +85,14 @@ public class BaseForm1 extends Form {
                         new Label(res.getImage("profile-pic.jpg"), "PictureWhiteBackgrond"))
         ));
         
-        tb.addMaterialCommandToSideMenu("CATEGORIE", FontImage.MATERIAL_UPDATE, e -> new CategorieForm(res).show());
-        tb.addMaterialCommandToSideMenu("PRODUITS", FontImage.MATERIAL_UPDATE, e -> new ProduitsForm(res).show());
-        tb.addMaterialCommandToSideMenu("COMMENTAIRES", FontImage.MATERIAL_UPDATE, e -> new CommentairesForm(res).show());
-        tb.addMaterialCommandToSideMenu("FRONTOFFICE", FontImage.MATERIAL_SETTINGS, e -> new ProduitsfeedForm1(res).show());
+        tb.addMaterialCommandToSideMenu("UTULISATEUR", FontImage.MATERIAL_FACE, e -> new CategorieForm(res).show());
+        tb.addMaterialCommandToSideMenu("EVENEMENT", FontImage.MATERIAL_EVENT, e -> new CategorieForm(res).show());
+        tb.addMaterialCommandToSideMenu("TOURNOI", FontImage.MATERIAL_EVENT_SEAT, e -> new CategorieForm(res).show());
+        tb.addMaterialCommandToSideMenu("CATEGORIE", FontImage.MATERIAL_CATEGORY, e -> new CategorieForm(res).show());
+        tb.addMaterialCommandToSideMenu("PRODUITS", FontImage.MATERIAL_PRODUCTION_QUANTITY_LIMITS, e -> new ProduitsForm(res).show());
+        tb.addMaterialCommandToSideMenu("COMMENTAIRES", FontImage.MATERIAL_COMMENT, e -> new CommentairesForm(res).show());
+        tb.addMaterialCommandToSideMenu("COMMANDES", FontImage.MATERIAL_SHOP, e -> new CommentairesForm(res).show());
+        tb.addMaterialCommandToSideMenu("FRONTOFFICE", FontImage.MATERIAL_HOME, e -> new ProduitsfeedForm1(res).show());
         tb.addMaterialCommandToSideMenu("Logout", FontImage.MATERIAL_EXIT_TO_APP, e -> new WalkthruForm(res).show());
        
     }
