@@ -21,17 +21,15 @@ package com.tournament.legacy.app;
 
 
 import com.codename1.components.FloatingHint;
-import com.codename1.ui.Button;
-import com.codename1.ui.Container;
-import com.codename1.ui.Display;
-import com.codename1.ui.Form;
-import com.codename1.ui.Label;
-import com.codename1.ui.TextField;
-import com.codename1.ui.Toolbar;
+import com.codename1.ui.*;
+import com.codename1.ui.events.ActionEvent;
+import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.util.Resources;
+import com.tournament.legacy.entites.User;
+import com.tournament.legacy.services.ServiceUser;
 
 /**
  * Signup UI
@@ -49,15 +47,13 @@ public class SignUpForm extends BaseForm {
         Form previous = Display.getInstance().getCurrent();
         tb.setBackCommand("", e -> previous.showBack());
         setUIID("SignIn");
-                
-        TextField username = new TextField("", "Username", 20, TextField.ANY);
-        TextField email = new TextField("", "E-Mail", 20, TextField.EMAILADDR);
-        TextField password = new TextField("", "Password", 20, TextField.PASSWORD);
-        TextField confirmPassword = new TextField("", "Confirm Password", 20, TextField.PASSWORD);
-        username.setSingleLineTextArea(false);
-        email.setSingleLineTextArea(false);
-        password.setSingleLineTextArea(false);
-        confirmPassword.setSingleLineTextArea(false);
+
+        TextField tfUsername = new TextField("", "Nom utilisateur", 10, TextField.ANY);
+        TextField tfEmail = new TextField("", "Email", 10, TextField.EMAILADDR);
+        TextField tfPassword = new TextField("", "Mot de passe", 10, TextField.PASSWORD);
+        tfUsername.setSingleLineTextArea(false);
+        tfEmail.setSingleLineTextArea(false);
+        tfPassword.setSingleLineTextArea(false);
         Button next = new Button("Next");
         Button signIn = new Button("Sign In");
         signIn.addActionListener(e -> previous.showBack());
@@ -66,13 +62,11 @@ public class SignUpForm extends BaseForm {
         
         Container content = BoxLayout.encloseY(
                 new Label("Sign Up", "LogoLabel"),
-                new FloatingHint(username),
+                new FloatingHint(tfUsername),
                 createLineSeparator(),
-                new FloatingHint(email),
+                new FloatingHint(tfEmail),
                 createLineSeparator(),
-                new FloatingHint(password),
-                createLineSeparator(),
-                new FloatingHint(confirmPassword),
+                new FloatingHint(tfPassword),
                 createLineSeparator()
         );
         content.setScrollableY(true);
@@ -82,7 +76,26 @@ public class SignUpForm extends BaseForm {
                 FlowLayout.encloseCenter(alreadHaveAnAccount, signIn)
         ));
         next.requestFocus();
-        next.addActionListener(e -> new ActivateForm(res).show());
+        next.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                if(tfUsername.getText().length()==0 || tfEmail.getText().length()==0 || tfPassword.getText().length()==0) {
+                    Dialog.show("Alerte", "Merci d'entrer tous les champs", new Command("OK"));
+                } else {
+                    try {
+                        User t = new User(tfUsername.getText(), tfEmail.getText(), tfPassword.getText());
+                        if(new ServiceUser().addUser(t)) {
+                            Dialog.show("Succès", "Vous vous êtes bien inscrit", new Command("OK"));
+                            new SignInForm(res).show();
+                        } else {
+                            Dialog.show("Erreur", "Erreur serveur", new Command("OK"));
+                        }
+                    } catch(Error e) {
+                        Dialog.show("Erreur", "L'erreur est " + e.getMessage(), new Command("OK"));
+                    }
+                }
+            }
+        });
     }
     
 }

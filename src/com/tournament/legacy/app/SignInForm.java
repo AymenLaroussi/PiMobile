@@ -21,15 +21,12 @@ package com.tournament.legacy.app;
 
 
 import com.codename1.components.FloatingHint;
-import com.codename1.ui.Button;
-import com.codename1.ui.Container;
-import com.codename1.ui.Display;
-import com.codename1.ui.Label;
-import com.codename1.ui.TextField;
+import com.codename1.ui.*;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.util.Resources;
+import com.tournament.legacy.services.ServiceUser;
 
 /**
  * Sign in UI
@@ -50,11 +47,11 @@ public class SignInForm extends BaseForm {
         setUIID("SignIn");
         
         add(BorderLayout.NORTH, new Label(res.getImage("Logo.png"), "LogoLabel"));
-        
-        TextField username = new TextField("", "Username", 20, TextField.ANY);
-        TextField password = new TextField("", "Password", 20, TextField.PASSWORD);
-        username.setSingleLineTextArea(false);
-        password.setSingleLineTextArea(false);
+
+        TextField tfUsername = new TextField("", "Nom utilisateur", 10, TextField.ANY);
+        TextField tfPassword = new TextField("", "Mot de passe", 10, TextField.PASSWORD);
+        tfUsername.setSingleLineTextArea(false);
+        tfPassword.setSingleLineTextArea(false);
         Button signIn = new Button("Sign In");
         Button signUp = new Button("Sign Up");
         signUp.addActionListener(e -> new SignUpForm(res).show());
@@ -62,9 +59,9 @@ public class SignInForm extends BaseForm {
         Label doneHaveAnAccount = new Label("Don't have an account?");
         
         Container content = BoxLayout.encloseY(
-                new FloatingHint(username),
+                new FloatingHint(tfUsername),
                 createLineSeparator(),
-                new FloatingHint(password),
+                new FloatingHint(tfPassword),
                 createLineSeparator(),
                 signIn,
                 FlowLayout.encloseCenter(doneHaveAnAccount, signUp)
@@ -72,7 +69,15 @@ public class SignInForm extends BaseForm {
         content.setScrollableY(true);
         add(BorderLayout.SOUTH, content);
         signIn.requestFocus();
-        signIn.addActionListener(e -> new NewsfeedForm(res).show());
+        signIn.addActionListener(e-> {
+            if(tfUsername.getText().length()==0 || tfPassword.getText().length()==0) {
+                Dialog.show("Alerte", "Merci d'entrer tous les champs", new Command("OK"));
+            } else {
+                ServiceUser.getInstance().connexionUser(tfUsername, tfPassword);
+                //a changé
+                new TournoiForm(res).show();
+            }
+        });
     }
     
 }
