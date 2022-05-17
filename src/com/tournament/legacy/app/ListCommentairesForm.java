@@ -27,7 +27,6 @@ import java.util.ArrayList;
 import java.util.ArrayList;
 
 public class ListCommentairesForm extends Form {
-final Button show = new Button("Show Dialog");
 String ch;
     public ListCommentairesForm(Resources res) {
 
@@ -40,7 +39,8 @@ String ch;
         list1.setScrollableX(true);
         for ( Commentaires coment : list) {
 
-
+            
+            final Button show = new Button("Show Dialog");
             SpanLabel LabelComent = new SpanLabel();
             MultiButton sp = new MultiButton();
             sp.getAllStyles().setFgColor(0x350afe);
@@ -58,9 +58,7 @@ String ch;
             list1.add(LabelComent);
             sp.setLeadComponent(show);
             list1.add(sp);
-            
-             }
-            show.addActionListener(e -> {if (Dialog.show("Confirmer", "", "SUPPRIMER", "ANNULER")) {
+             show.addActionListener(e -> {if (Dialog.show("Confirmer", "", "SUPPRIMER", "ANNULER")) {
                        try{
         ServiceCommentaire.getInstance().supprimerCommentaire(show.getText());}
         catch (NullPointerException npe){
@@ -71,6 +69,8 @@ String ch;
              
 
 });
+             }
+           
 
        
         
